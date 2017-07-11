@@ -1,0 +1,147 @@
+:root {
+	--color-primary: #fece46;
+	--color-primary-shade: #149dff;
+	--color-primary-grey: #f2f2f2;
+	--color-primary-green: #42db41;
+	--color-secondary-green: #6aff69;
+
+	--font: 'Lato';
+	--font-header: 'Lato';
+	--font-color: #333;
+	--line-height: 1.45;
+
+	--text-size-xlg: 1.266em;
+	--text-size-lg: 1.125em;
+	--text-size-rg: 16px;
+	--text-size-sm: 0.889em;
+	--text-size-xsm: 0.79em;
+
+	--header-size-lg: 3.998em;
+	--header-size-rg: 2.827em;
+	--header-size-sm: 1.999em;
+	--header-size-xsm: 1.414em;
+
+	--container-padding-xsm: 3rem 1.5rem;
+	--container-padding-sm: 3rem;
+	--container-padding-rg: 5rem;
+	--container-lg: 1200px;
+	--container-rg: 960px;
+}
+
+*, *:before, *:after {
+	box-sizing: border-box;
+}
+
+body {
+	margin: 0;
+	background-color: var(--color-primary-grey);
+	color: var(--font-color);
+	font-family: var(--font);
+	font-size: var(--text-size-rg);
+	line-height: var(--line-height);
+}
+
+h1, h2, h3, h4 {
+  margin: 1.414em 0 0.5em;
+  margin-top: 0;
+  line-height: 1.2;
+	font-family: var(--font-header);
+}
+
+h1 {
+  font-size: 3.157em;
+}
+
+h2 {font-size: 2.369em;}
+
+h3 {font-size: 1.777em;}
+
+h4 {font-size: 1.333em;}
+
+header {
+	font-family: var(--font-header);
+}
+
+small, .font_small {font-size: 0.75em;}
+
+a {
+	text-decoration: none;
+	color: inherit;
+}
+
+a.fill {
+	background-color: var(--font-color);
+	color: var(--color-primary);
+	padding: 0.7rem 1.5rem;
+}
+
+a.bordered {
+	border: 2px solid #fff;
+	padding: 0.2rem 0.5rem;
+}
+
+a span.icon {
+	margin-left: 0.5rem;
+	font-weight: bold;
+}
+
+p {
+	margin: 0;
+}
+
+p + p {
+	margin-bottom: 1.3em;
+}
+
+hr {
+	width: 75px;
+	margin-left: 0;
+	border: 0;
+	border-bottom: 3px solid #FCB244;
+}
+
+button:hover {
+	cursor: pointer;
+}
+
+input, textarea, button {
+	border: 0;
+}
+
+input, textarea {
+	padding: 0.6rem 0.7rem;
+	font-family: inherit;
+	font-size: inherit;
+}
+
+.container--lg {
+	padding: var(--container-padding-rg) calc(50% - (var(--container-lg) / 2));
+}
+
+.container {
+	padding: var(--container-padding-rg) calc(50% - (var(--container-rg) / 2));
+}
+
+.section-header {
+	margin-bottom: var(--container-padding-rg);
+}
+
+@media (max-width: 1300px) {
+	.container--lg {
+		padding: var(--container-padding-rg);
+	}
+}
+
+@media (max-width: 1060px) {
+	.container--lg, .container {
+		padding: var(--container-padding-sm);
+	}
+
+	.section-header {
+		margin-bottom: var(--container-padding-sm);
+	}
+}
+
+.text-center {
+	text-align: center;
+}
