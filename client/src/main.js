@@ -4,7 +4,12 @@ import Vue from 'vue'
 import App from './App'
 import router from './router'
 import './assets/css/global.css'
+import axios from 'axios'
 
+axios.defaults.headers.common['Authorization'] = 'Bearer ' + localStorage.getItem('id_token')
+axios.defaults.baseURL = 'http://localhost:3000'
+
+Vue.prototype.$http = axios
 Vue.config.productionTip = false
 
 /* eslint-disable no-new */
@@ -14,3 +19,4 @@ new Vue({
   template: '<App/>',
   components: { App }
 })
+

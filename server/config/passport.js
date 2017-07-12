@@ -8,8 +8,8 @@ const Project = mongoose.model('Project');
 const returnErrorMessage = (done, message) => done(null, false, { message });
 
 async function findUserByEmail(email) {
-	const caseInsensitiveEmail = new RegExp('^' + req.body.email + '$', 'i');
-	const user = await User.model.findOne({ email: caseInsensitiveEmail });
+	const caseInsensitiveEmail = new RegExp('^' + email + '$', 'i');
+	const user = await User.findOne({ email: caseInsensitiveEmail });
 
 	return user;
 }
@@ -17,13 +17,13 @@ async function findUserByEmail(email) {
 async function comparePasswords(passwordOne, passwordTwo) {
 	const doPasswordsMatch = await bcrypt.compare(passwordOne, passwordTwo);
 
-	return passwordsMatch;
+	return doPasswordsMatch;
 }
 
-async function createUser({ email, name, password }) {
+async function createUser({ email, password }) {
 	const hash = await bcrypt.hash(password, 10);
-	const user = new User.model({
-		email: req.body.email,
+	const user = new User({
+		email,
 		password: hash,
 	});
 
@@ -35,18 +35,16 @@ async function createUser({ email, name, password }) {
 passport.serializeUser((user, done) => done(null, user.email));
 passport.deserializeUser(async (email, done) => done(null, await findUserByEmail(email)));
 
-passport.use('local-signin', new LocalStrategy({
+passport.use('local-login', new LocalStrategy({
 	usernameField: 'email',
 	passwordField: 'password',
 	passReqToCallback: true,
 }, async (req, email, password, done) => {
 	const invalidCrednentialsMessage = 'Invalid email or password';
-	const [user, validPassword] = await Promise.all([
-		findUserByEmail(email),
-		comparePasswords(password, user.password),
-	]);
+	const user = await findUserByEmail(email);
+	const doPasswordsMatch = await comparePasswords(password, user.password);
 
-	if (!user || !isPasswordCorrect) {
+	if (!user || !doPasswordsMatch) {
 		return done(null, false, { message: invalidCrednentialsMessage });
 	}
 
@@ -64,14 +62,12 @@ passport.use('local-register', new LocalStrategy({
 	req.checkBody('email', 'A valid email is required.').isEmail();
 	req.checkBody('password', 'Password must be at least 8 characters long.').isLength({ min: 8 });
 	req.checkBody('password', 'Passwords do not match').equals(req.body.password2);
-	req.checkBody('name', 'Name must not be empty.').notEmpty();
 
 	const validationErrors = req.validationErrors();
 	if (validationErrors) return done(null, false, { message: validationErrors[0].msg});
 
 	const user = await createUser({
 		email,
-		name: req.body.name,
 		password,
 	});
 

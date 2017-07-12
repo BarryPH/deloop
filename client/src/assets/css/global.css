@@ -69,13 +69,17 @@ a {
 	color: inherit;
 }
 
-a.fill {
+a.fill, button.fill {
 	background-color: var(--font-color);
-	color: var(--color-primary);
+	color: #fff;
 	padding: 0.7rem 1.5rem;
 }
 
-a.bordered {
+a.color-primary {
+	color: var(--color-primary);
+}
+
+a.bordered, button.bordered {
 	border: 2px solid #fff;
 	padding: 0.2rem 0.5rem;
 }
@@ -144,4 +148,8 @@ input, textarea {
 
 .text-center {
 	text-align: center;
+}
+
+.form-group {
+	margin-bottom: 2rem;
 }

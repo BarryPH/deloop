@@ -11,7 +11,7 @@ export default {
 			<a href='/'>Home</a>
 			<a href='/projects'>Projects</a>
 			<a href='/why'>Why Deloop?</a>
-			<a href='/signin'>Sign in</a>
+			<a href='/login'>Login</a>
 			<a class='bordered' href='/register'>Register</a>
 		</nav>
 	</div>

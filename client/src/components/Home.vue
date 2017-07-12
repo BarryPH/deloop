@@ -7,7 +7,7 @@ export default {
 	components: {
 		Hero,
 		Projects,
-	}
+	},
 }
 </script>
 

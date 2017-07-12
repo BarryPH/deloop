@@ -9,7 +9,7 @@ export default {
 		<h2 class='hero-headline'>A place for designers <br> to give and recieve feedback</h2>
 
 		<nav>
-			<a class='fill' href='/projects'>View Projects</a>
+			<a class='fill color-primary' href='/projects'>View Projects</a>
 			<a href='/register'>Register <span class='icon'>&rarr;</span></a>
 		</nav>
 	</div>

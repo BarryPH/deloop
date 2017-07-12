@@ -44,7 +44,7 @@ export default {
 	margin-bottom: 2rem;
 	max-width: 300px;
 	background-color: #fff;
-	box-shadow: 0 0 3px #eaeaea;
+	box-shadow: 0 0 3px #dadada;
 }
 
 img {
