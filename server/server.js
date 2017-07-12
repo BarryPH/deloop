@@ -30,6 +30,8 @@ app.use(passport.initialize());
 app.use(passport.session());
 rootRequire('./config/passport');
 
+app.use(rootRequire('./routes'));
+
 async function main() {
 	const port = process.env.PORT || 3000;
 	await app.listen(port);

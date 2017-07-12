@@ -1,15 +1,21 @@
 <script>
-const projects = Array(6).fill({
-	_id: 0,
-	title: 'Employify Homepage',
-})
+import axios from 'axios';
 
 export default {
 	name: 'projects',
 	data: function() {
 		return {
-			projects,
+			projects: [],
 		}
+	},
+	created() {
+		this.fetchData();
+	},
+	methods: {
+		async fetchData() {
+			const { data: projects } = await axios.get('http://localhost:3000/projects');
+			this.projects = projects;
+		},
 	},
 }
 </script>
@@ -17,8 +23,7 @@ export default {
 <template>
 	<div class='projects'>
 		<div v-for='project in projects' class='project'>
-			<div class='image'>
-			</div>
+			<img :src='project.featureImage.url'>
 
 			<a :href='"/projects/" + project._id'>
 				<header class='title'>{{project.title}}</header>
@@ -35,15 +40,17 @@ export default {
 }
 
 .project {
-	background-color: #fff;
 	padding: 1.2rem;
 	margin-bottom: 2rem;
+	max-width: 300px;
+	background-color: #fff;
 	box-shadow: 0 0 3px #eaeaea;
 }
 
-.image {
+img {
+	display: block;
 	margin-bottom: 1rem;
-	width: 250px;
+	width: 100%;
 	height: 150px;
 	background-color: #f2f2f2;
 }
