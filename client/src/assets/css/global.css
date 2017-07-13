@@ -22,10 +22,11 @@
 	--header-size-xsm: 1.414em;
 
 	--container-padding-xsm: 3rem 1.5rem;
-	--container-padding-sm: 3rem;
 	--container-padding-rg: 5rem;
+	--container-padding-sm: 3rem;
 	--container-lg: 1200px;
 	--container-rg: 960px;
+	--container-sm: 400px;
 }
 
 *, *:before, *:after {
@@ -118,12 +119,23 @@ input, textarea {
 	font-size: inherit;
 }
 
+input, select, textarea {
+	display: block;
+	width: 100%;
+	margin-bottom: 1rem;
+	background-color: #eaeaea;
+}
+
 .container--lg {
 	padding: var(--container-padding-rg) calc(50% - (var(--container-lg) / 2));
 }
 
 .container {
 	padding: var(--container-padding-rg) calc(50% - (var(--container-rg) / 2));
+}
+
+.container--sm {
+	padding: var(--container-padding-rg) calc(50% - (var(--container-sm) / 2));
 }
 
 .section-header {
@@ -137,13 +149,21 @@ input, textarea {
 }
 
 @media (max-width: 1060px) {
-	.container--lg, .container {
+	.container--lg, .container, .container--sm {
 		padding: var(--container-padding-sm);
 	}
 
 	.section-header {
 		margin-bottom: var(--container-padding-sm);
 	}
+}
+
+.panel {
+	border-top: 15px solid #333;
+	padding: 2.5rem;
+	margin: auto;
+	background-color: #fff;
+	box-shadow: 0 0 3px #dadada;
 }
 
 .text-center {

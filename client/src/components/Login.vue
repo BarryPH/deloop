@@ -24,8 +24,8 @@ export default {
 </script>
 
 <template>
-	<div class='container'>
-		<div class='wrapper'>
+	<div class='container--sm'>
+		<div class='panel text-center'>
 			<h3>Login</h3>
 
 			<form v-on:submit.prevent='handleSubmit'>
@@ -41,27 +41,7 @@ export default {
 </template>
 
 <style scoped>
-.container {
-	text-align: center;
-}
-
-.wrapper {
-	border-top: 15px solid #333;
-	padding: 2.5rem;
-	max-width: 400px;
-	margin: auto;
-	background-color: #fff;
-	box-shadow: 0 0 3px #dadada;
-}
-
 form {
-	margin: 2rem 0 0;
-}
-
-input {
-	display: block;
-	width: 100%;
-	margin-bottom: 1rem;
-	background-color: #eaeaea;
+	margin-top: 2rem;
 }
 </style>
