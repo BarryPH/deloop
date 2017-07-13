@@ -170,6 +170,14 @@ input, select, textarea {
 	text-align: center;
 }
 
+.successMessage {
+	color: #42db41;
+}
+
+.errorMessage {
+	color: red;
+}
+
 .form-group {
 	margin-bottom: 2rem;
 }

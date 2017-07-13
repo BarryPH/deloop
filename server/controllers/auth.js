@@ -42,7 +42,10 @@ module.exports.register = async (req, res, next) => {
 
 	if (!user) {
 		return res.json({
-			errorMessage: info.message,
+			info: {
+				success: false,
+				message: info.message,
+			}
 		});
 	}
 
@@ -51,6 +54,10 @@ module.exports.register = async (req, res, next) => {
 	const token = jwt.sign(user, config.superSecret);
 	const response = Object.assign({}, user._doc, {
 		token,
+		info: {
+			success: true,
+			message: 'Success!',
+		}
 	})
 	res.json(response);
 };
@@ -60,13 +67,20 @@ module.exports.login = async (req, res, next) => {
 
 	if (!user) {
 		return res.json({
-			errorMessage: info.message,
+			info: {
+				success: false,
+				message: info.message,
+			}
 		});
 	}
 
 	const token = jwt.sign(user, config.superSecret);
 	const response = Object.assign({}, user._doc, {
 		token,
+		info: {
+			success: true,
+			message: 'Success!',
+		}
 	})
 	res.json(response);
 };

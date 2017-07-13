@@ -3,7 +3,7 @@ export default {
 		authenticated: false,
 	},
 	async login(context, creds) {
-		const { data: { token } } = await context.$http.post('/login', {
+		const { data: { token, info } } = await context.$http.post('/login', {
 			email: creds.email,
 			password: creds.password,
 		});
@@ -12,9 +12,11 @@ export default {
 		localStorage.setItem('id_token', token);
 		this.user.authenticated = true;
 		//location.reload();
+
+		return info;
 	},
 	async register(context, creds) {
-		const { data: { token } } = await context.$http.post('/register', {
+		const { data: { token, info } } = await context.$http.post('/register', {
 			email: creds.email,
 			password: creds.password,
 			password2: creds.password2,
@@ -24,6 +26,8 @@ export default {
 		localStorage.setItem('id_token', token);
 		this.user.authenticated = true;
 		//location.reload();
+
+		return info;
 	},
 	async logout(context) {
 		await context.$http.post('/logout');

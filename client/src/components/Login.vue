@@ -8,6 +8,11 @@ export default {
 		return {
 			email: '',
 			password: '',
+			submitted: false,
+			info: {
+				success: false,
+				message: 'Please submit the form',
+			},
 		};
 	},
 	methods: {
@@ -17,7 +22,10 @@ export default {
 				password: this.password,
 			};
 
-			auth.login(this, formData);
+			const info = await auth.login(this, formData);
+
+			this.info = info;
+			this.submitted = true;
 		},
 	},
 }
@@ -28,7 +36,10 @@ export default {
 		<div class='panel text-center'>
 			<h3>Login</h3>
 
+
 			<form v-on:submit.prevent='handleSubmit'>
+				<div v-show='submitted' v-bind:class='["formMessage", info.success ? "successMessage" : "errorMessage"]'>{{info.message}}</div>
+
 				<div class='form-group'>
 					<input placeholder='Email' name='email' v-model='email'>
 					<input placeholder='Password' name='password' type='password' v-model='password'>
@@ -43,5 +54,9 @@ export default {
 <style scoped>
 form {
 	margin-top: 2rem;
+}
+
+.formMessage {
+	margin-bottom: 2rem;
 }
 </style>
