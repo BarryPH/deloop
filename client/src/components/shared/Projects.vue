@@ -3,6 +3,9 @@ import axios from 'axios';
 
 export default {
 	name: 'projects',
+	props: {
+		clear: Boolean,
+	},
 	data: function() {
 		return {
 			projects: [],
@@ -21,9 +24,11 @@ export default {
 </script>
 
 <template>
-	<div class='projects'>
+	<div class='projects' :class='[clear ? "clear" : null]'>
 		<div v-for='project in projects' class='project'>
-			<img :src='project.featureImage.url'>
+			<a :href='"/projects/" + project._id'>
+				<img :src='project.featureImage.url'>
+			</a>
 
 			<a :href='"/projects/" + project._id'>
 				<header class='title'>{{project.title}}</header>
@@ -37,21 +42,33 @@ export default {
 	display: flex;
 	flex-wrap: wrap;
 	justify-content: space-around;
+	width: calc(100% + 1.5rem);
 }
 
 .project {
+	flex-grow: 1;
 	padding: 1.2rem;
-	margin-bottom: 2rem;
-	max-width: 300px;
+	margin-bottom: 1.5rem;
+	margin-right: 1.5rem;
+	width: 250px;
 	background-color: #fff;
-	box-shadow: 0 0 3px #dadada;
+	box-shadow: 0 0 3px #eaeaea;
+}
+
+.projects.clear {
+	justify-content: space-evenly;
+	padding: 1rem;
+	margin-bottom: -1.5rem;
+}
+
+.projects.clear .project {
+	padding: 0;
+	box-shadow: none;
 }
 
 img {
 	display: block;
 	margin-bottom: 1rem;
 	width: 100%;
-	height: 150px;
-	background-color: #f2f2f2;
 }
 </style>

@@ -33,7 +33,7 @@ export default {
 
 <template>
 	<div class='container--sm'>
-		<div class='panel text-center'>
+		<div class='panel panel--bordered text-center'>
 			<h3>Login</h3>
 
 

@@ -35,11 +35,11 @@ export default {
 
 <template>
 	<div class='container--sm'>
-		<div class='panel text-center'>
+		<div class='panel panel--bordered text-center'>
 			<h3>Join Deloop</h3>
 
 			<form v-on:submit.prevent='handleSubmit'>
-				<div v-show='submitted' v-bind:class='["formMessage", info.success ? "successMessage" : "errorMessage"]'>{{info.message}}</div>
+				<div v-show='submitted' :class='["formMessage", info.success ? "successMessage" : "errorMessage"]'>{{info.message}}</div>
 
 				<div class='form-group'>
 					<input placeholder='Email' name='email' v-model='email'>

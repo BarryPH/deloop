@@ -3,6 +3,7 @@
 	--color-primary-shade: #149dff;
 	--color-primary-grey: #f2f2f2;
 	--color-primary-green: #42db41;
+	--color-primary-blue: #007fff;
 	--color-secondary-green: #6aff69;
 
 	--font: 'Lato';
@@ -70,6 +71,10 @@ a {
 	color: inherit;
 }
 
+a.link {
+	color: var(--color-primary-blue);
+}
+
 a.fill, button.fill {
 	background-color: var(--font-color);
 	color: #fff;
@@ -99,10 +104,9 @@ p + p {
 }
 
 hr {
-	width: 75px;
 	margin-left: 0;
 	border: 0;
-	border-bottom: 3px solid #FCB244;
+	border-bottom: 2px solid #eaeaea;
 }
 
 button:hover {
@@ -159,11 +163,19 @@ input, select, textarea {
 }
 
 .panel {
-	border-top: 15px solid #333;
 	padding: 2.5rem;
-	margin: auto;
 	background-color: #fff;
-	box-shadow: 0 0 3px #dadada;
+	box-shadow: 0 0 3px #eaeaea;
+}
+
+.panel--bordered {
+	border-top: 15px solid #333;
+}
+
+@media (max-width: 1060px) {
+	.panel {
+		padding: 1.5rem;
+	}
 }
 
 .text-center {
