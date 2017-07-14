@@ -1,6 +1,6 @@
 export default {
 	user: {
-		authenticated: false,
+		authenticated: !!localStorage.getItem('id_token'),
 	},
 	async login(context, creds) {
 		const { data: { token, info } } = await context.$http.post('/login', {
@@ -8,10 +8,13 @@ export default {
 			password: creds.password,
 		});
 
+		if (!info.success) return info;
+
 		context.$http.defaults.headers.common['Authorization'] = `Bearer ${token}`;
 		localStorage.setItem('id_token', token);
 		this.user.authenticated = true;
-		//location.reload();
+
+		context.$router.push('/');
 
 		return info;
 	},
@@ -22,21 +25,25 @@ export default {
 			password2: creds.password2,
 		});
 
+		if (!info.success) return info;
+
 		context.$http.defaults.headers.common['Authorization'] = `Bearer ${token}`;
 		localStorage.setItem('id_token', token);
 		this.user.authenticated = true;
-		//location.reload();
+
+		context.$router.push('/');
 
 		return info;
 	},
 	async logout(context) {
-		await context.$http.post('/logout');
+		context.$http.post('/logout');
 		localStorage.removeItem('id_token');
 		this.user.authenticated = false;
-		//context.$router.push('/logout');
+
+		context.$router.push('/');
 	},
 	checkAuth() {
-		const jwt = localStorage.getItem('id_token');
-		return jwt && this.user.authenticated;
+		const token = localStorage.getItem('id_token');
+		return !!token;
 	},
 };

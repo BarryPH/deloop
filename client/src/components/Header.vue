@@ -1,6 +1,18 @@
 <script>
+import auth from '@/auth';
+
 export default {
 	name: 'header',
+	data() {
+		return {
+			auth,
+		}
+	},
+	methods: {
+		async logout() {
+			auth.logout(this);
+		}
+	},
 }
 </script>
 
@@ -8,11 +20,17 @@ export default {
 	<div class='container site-header'>
 		<div class='logo'>Deloop</div>
 		<nav>
-			<a href='/'>Home</a>
-			<a href='/projects'>Projects</a>
-			<a href='/why'>Why Deloop?</a>
-			<a href='/login'>Login</a>
-			<a class='bordered' href='/register'>Register</a>
+			<router-link to='/'>Home</router-link>
+			<router-link to='/projects'>Projects</router-link>
+			<router-link to='/why'>Why Deloop?</router-link>
+
+			<span v-if='auth.user.authenticated'>
+				<a v-on:click='logout()'>Logout</a>
+			</span>
+			<span v-else>
+				<router-link to='/login'>Login</router-link>
+				<router-link to='/register' class='bordered'>Register</router-link>
+			</span>
 		</nav>
 	</div>
 </template>
