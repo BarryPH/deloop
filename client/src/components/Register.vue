@@ -3,7 +3,7 @@ import auth from '@/auth';
 import axios from 'axios';
 
 export default {
-	name: 'register',
+	name: 'register-page',
 	data() {
 		return {
 			email: '',

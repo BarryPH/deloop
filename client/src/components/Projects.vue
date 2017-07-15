@@ -3,7 +3,7 @@ import Hero from '@/components/Home/Hero.vue'
 import Projects from '@/components/shared/Projects.vue'
 
 export default {
-	name: 'home-page',
+	name: 'projects-page',
 	components: {
 		Hero,
 		Projects,
@@ -13,10 +13,8 @@ export default {
 
 <template>
 	<div>
-		<Hero />
-
 		<div class='container'>
-			<h4 class='section-header text-center'>Recent Projects</h4>
+			<h3 class='section-header text-center'>Projects<hr></h3>
 
 			<Projects />
 

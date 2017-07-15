@@ -3,7 +3,7 @@ import auth from '@/auth';
 import axios from 'axios';
 
 export default {
-	name: 'login',
+	name: 'login-page',
 	data() {
 		return {
 			email: '',

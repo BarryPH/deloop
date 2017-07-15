@@ -2,7 +2,7 @@
 import Projects from '@/components/shared/Projects.vue'
 
 export default {
-	name: 'profile',
+	name: 'profile-page',
 	components: {
 		Projects,
 	},
