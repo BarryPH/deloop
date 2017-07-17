@@ -13,4 +13,5 @@ yarn-error.log*
 *.sln
 
 ### Project Config ###
-config.js
+server/config/config.js
+client/config/prod.env.js
