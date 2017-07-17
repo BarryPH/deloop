@@ -5,6 +5,7 @@ export default {
 	name: 'projects',
 	props: {
 		clear: Boolean,
+		addNew: Boolean,
 	},
 	data: function() {
 		return {
@@ -32,6 +33,16 @@ export default {
 
 			<a :href='"/projects/" + project._id'>
 				<header class='title'>{{project.title}}</header>
+			</a>
+		</div>
+
+		<div class='project addNew'>
+			<a href='/projects/new'>
+				<img src='http://via.placeholder.com/350x200'>
+			</a>
+
+			<a href='/projects/new'>
+				<header class='title'>Add new project</header>
 			</a>
 		</div>
 	</div>
@@ -64,6 +75,10 @@ export default {
 .projects.clear .project {
 	padding: 0;
 	box-shadow: none;
+}
+
+.project.addNew a {
+	color: var(--color-primary-blue);
 }
 
 img {

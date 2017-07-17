@@ -11,6 +11,8 @@ const app = express();
 const rootRequire = require.main.require;
 const config = rootRequire('./config/config');
 
+process.env.CLOUDINARY_URL = config.cloudinaryUrl;
+
 process.on('unhandledRejection', (reason) => {
 	console.log('Unhandled Rejection:', reason);
 });

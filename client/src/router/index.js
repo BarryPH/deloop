@@ -5,6 +5,7 @@ import Register from '@/components/Register'
 import Login from '@/components/Login'
 import Profile from '@/components/Profile'
 import Projects from '@/components/Projects'
+import ProjectNew from '@/components/ProjectNew'
 
 Vue.use(Router)
 
@@ -35,6 +36,11 @@ export default new Router({
 			path: '/projects',
 			name: 'Projects',
 			component: Projects,
+		},
+		{
+			path: '/projects/new',
+			name: 'New Project',
+			component: ProjectNew,
 		},
   ]
 })
