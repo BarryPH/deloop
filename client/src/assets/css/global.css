@@ -83,6 +83,10 @@ a.fill, button.fill {
 	padding: 0.7rem 1.5rem;
 }
 
+a.fill-go, button.fill-go {
+	background-color: var(--color-primary-green);
+}
+
 a.color-primary {
 	color: var(--color-primary);
 }
