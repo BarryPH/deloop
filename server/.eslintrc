@@ -1,0 +1,20 @@
+{
+	"env": {
+		"es6": true,
+	},
+	"extends": "airbnb-base",
+	"plugins": [
+		"html",
+	],
+	"rules": {
+		"indent": [
+			"error",
+			"tab"
+		],
+		"no-tabs": 0,
+		"linebreak-style": [
+			"error",
+			"unix",
+		],
+	},
+}
