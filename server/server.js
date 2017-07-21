@@ -21,6 +21,9 @@ if (process.env.NODE_ENV !== 'prodution' && process.env.NODE_ENV !== 'test') {
 	app.use(logger('dev'));
 }
 
+// Use native promises as mongoose promise library
+mongoose.Promise = global.Promise;
+
 mongoose.connect(config.mongoUri || `mongodb://localhost/${pkg.name}`, {
 	useMongoClient: true
 });
