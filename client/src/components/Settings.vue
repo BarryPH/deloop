@@ -26,7 +26,6 @@ export default {
 		},
 		async handleSubmit(event) {
 			const JSONFormData = utils.formToJSON(event.target);
-
 			const { data: { token, info } } = await this.$http.post('/user', JSONFormData);
 
 			this.info = info;

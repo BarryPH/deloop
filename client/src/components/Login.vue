@@ -1,12 +1,11 @@
 <script>
 import auth from '@/auth';
+import utils from '@/utils.js';
 
 export default {
 	name: 'login-page',
 	data() {
 		return {
-			email: '',
-			password: '',
 			submitted: false,
 			info: {
 				success: false,
@@ -15,13 +14,9 @@ export default {
 		};
 	},
 	methods: {
-		async handleSubmit() {
-			const formData = {
-				email: this.email,
-				password: this.password,
-			};
-
-			const info = await auth.login(this, formData);
+		async handleSubmit(event) {
+			const JSONFormData = utils.formToJSON(event.target);
+			const info = await auth.login(this, JSONFormData);
 
 			this.info = info;
 			this.submitted = true;
@@ -40,8 +35,8 @@ export default {
 				<div v-show='submitted' v-bind:class='["formMessage", info.success ? "successMessage" : "errorMessage"]'>{{info.message}}</div>
 
 				<div class='form-group'>
-					<input placeholder='Email' name='email' v-model='email'>
-					<input placeholder='Password' name='password' type='password' v-model='password'>
+					<input placeholder='Email' name='email'>
+					<input placeholder='Password' name='password' type='password'>
 				</div>
 
 				<button class='fill' type='submit'>Login</button>

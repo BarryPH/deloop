@@ -1,5 +1,6 @@
 <script>
 import auth from '@/auth';
+import utils from '@/utils.js';
 
 export default {
 	name: 'register-page',
@@ -17,13 +18,8 @@ export default {
 	},
 	methods: {
 		async handleSubmit() {
-			const formData = {
-				email: this.email,
-				password: this.password,
-				password2: this.password2,
-			};
-
-			const info = await auth.register(this, formData);
+			const JSONFormData = utils.formToJSON(event.target);
+			const info = await auth.register(this, JSONFormData);
 
 			this.info = info;
 			this.submitted = true;
@@ -41,9 +37,9 @@ export default {
 				<div v-show='submitted' :class='["formMessage", info.success ? "successMessage" : "errorMessage"]'>{{info.message}}</div>
 
 				<div class='form-group'>
-					<input placeholder='Email' name='email' v-model='email'>
-					<input placeholder='Password' name='password' type='password' v-model='password'>
-					<input placeholder='Repeat Password' name='password2' type='password' v-model='password2'>
+					<input placeholder='Email' name='email'>
+					<input placeholder='Password' name='password' type='password'>
+					<input placeholder='Repeat Password' name='password2' type='password'>
 				</div>
 
 				<button class='fill' type='submit'>Register</button>
