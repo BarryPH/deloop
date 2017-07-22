@@ -1,5 +1,5 @@
 <script>
-import Projects from '@/components/shared/Projects.vue'
+import Projects from '@/components/shared/Projects.vue';
 import auth from '@/auth';
 
 export default {
@@ -10,9 +10,9 @@ export default {
 	data() {
 		return {
 			auth,
-		}
+		};
 	},
-}
+};
 </script>
 
 <template>

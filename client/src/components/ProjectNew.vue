@@ -1,7 +1,4 @@
 <script>
-import auth from '@/auth';
-import axios from 'axios';
-
 export default {
 	name: 'project-new-page',
 	data() {
@@ -22,13 +19,13 @@ export default {
 			const form = event.target;
 			const formData = new FormData(form);
 
-			const { data: { info, project } } = await this.$http.post('/projects', formData);
+			const { data: { info } } = await this.$http.post('/projects', formData);
 
 			this.info = info;
 			this.submitted = true;
 		},
 	},
-}
+};
 </script>
 
 <template>

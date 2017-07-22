@@ -1,17 +1,17 @@
 <script>
-import Header from '@/components/Header.vue'
+import Header from '@/components/Header.vue';
 
 export default {
-  name: 'app',
+	name: 'app',
 	components: { Header },
-}
+};
 </script>
 
 <template>
-  <div id="app">
+	<div id="app">
 		<Header />
-    <router-view></router-view>
-  </div>
+		<router-view></router-view>
+	</div>
 </template>
 
 <style>

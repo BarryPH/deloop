@@ -6,14 +6,14 @@ export default {
 	data() {
 		return {
 			auth,
-		}
+		};
 	},
 	methods: {
 		async logout() {
 			auth.logout(this);
-		}
+		},
 	},
-}
+};
 </script>
 
 <template>

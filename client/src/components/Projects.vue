@@ -1,6 +1,6 @@
 <script>
-import Hero from '@/components/Home/Hero.vue'
-import Projects from '@/components/shared/Projects.vue'
+import Hero from '@/components/Home/Hero.vue';
+import Projects from '@/components/shared/Projects.vue';
 
 export default {
 	name: 'projects-page',
@@ -8,7 +8,7 @@ export default {
 		Hero,
 		Projects,
 	},
-}
+};
 </script>
 
 <template>

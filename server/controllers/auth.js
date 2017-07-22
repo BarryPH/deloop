@@ -1,7 +1,4 @@
-const mongoose = require('mongoose');
-const User = mongoose.model('User');
 const passport = require('passport');
-const { promisify } = require('util');
 const jwt = require('jsonwebtoken');
 
 const rootRequire = require.main.require;
@@ -12,7 +9,7 @@ function promisifiedRegister(req, res, next) {
 		passport.authenticate('local-register', (err, user, info) => {
 			if (err) return reject(err);
 
-			resolve([user, info]);
+			return resolve([user, info]);
 		})(req, res, next);
 	});
 }
@@ -22,7 +19,7 @@ function promisifiedLogin(req, res, next) {
 		passport.authenticate('local-login', (err, user, info) => {
 			if (err) return reject(err);
 
-			resolve([user, info]);
+			return resolve([user, info]);
 		})(req, res, next);
 	});
 }
@@ -32,7 +29,7 @@ function promisifiedReqLogin(req, user) {
 		req.login(user, (err) => {
 			if (err) return reject(err);
 
-			resolve(user);
+			return resolve(user);
 		});
 	});
 }
@@ -45,21 +42,22 @@ module.exports.register = async (req, res, next) => {
 			info: {
 				success: false,
 				message: info.message,
-			}
+			},
 		});
 	}
 
 	await promisifiedReqLogin(req, user);
 
 	const token = jwt.sign(user, config.superSecret);
-	const response = Object.assign({}, user._doc, {
+	const response = Object.assign({}, user.toObject(), {
 		token,
 		info: {
 			success: true,
 			message: 'Success!',
-		}
-	})
-	res.json(response);
+		},
+	});
+
+	return res.json(response);
 };
 
 module.exports.login = async (req, res, next) => {
@@ -70,22 +68,23 @@ module.exports.login = async (req, res, next) => {
 			info: {
 				success: false,
 				message: info.message,
-			}
+			},
 		});
 	}
 
 	const token = jwt.sign(user, config.superSecret);
-	const response = Object.assign({}, user._doc, {
+	const response = Object.assign({}, user.toObject(), {
 		token,
 		info: {
 			success: true,
 			message: 'Success!',
-		}
-	})
-	res.json(response);
+		},
+	});
+
+	return res.json(response);
 };
 
-module.exports.logout = async (req, res, next) => {
+module.exports.logout = async (req, res) => {
 	req.logout();
 	res.json({});
 };

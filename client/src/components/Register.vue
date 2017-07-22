@@ -1,6 +1,5 @@
 <script>
 import auth from '@/auth';
-import axios from 'axios';
 
 export default {
 	name: 'register-page',
@@ -30,7 +29,7 @@ export default {
 			this.submitted = true;
 		},
 	},
-}
+};
 </script>
 
 <template>

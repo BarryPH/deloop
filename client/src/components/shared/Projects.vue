@@ -7,10 +7,10 @@ export default {
 		clear: Boolean,
 		addNew: Boolean,
 	},
-	data: function() {
+	data() {
 		return {
 			projects: [],
-		}
+		};
 	},
 	created() {
 		this.fetchData();
@@ -21,7 +21,7 @@ export default {
 			this.projects = projects;
 		},
 	},
-}
+};
 </script>
 
 <template>

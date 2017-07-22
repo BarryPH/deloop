@@ -11,7 +11,7 @@
 	"rules": {
 		"indent": [
 			"error",
-			"tab"
+			"tab",
 		],
 		"no-tabs": 0,
 		"linebreak-style": [
@@ -19,5 +19,6 @@
 			"unix",
 		],
 		"import/no-unresolved": 0,
+		"import/extensions": 0,
 	},
 }

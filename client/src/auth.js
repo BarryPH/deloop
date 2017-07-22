@@ -10,7 +10,8 @@ export default {
 
 		if (!info.success) return info;
 
-		context.$http.defaults.headers.common['Authorization'] = `Bearer ${token}`;
+		// eslint-disable-next-line no-param-reassign
+		context.$http.defaults.headers.common.Authorization = `Bearer ${token}`;
 		localStorage.setItem('id_token', token);
 		this.user.authenticated = true;
 
@@ -27,7 +28,8 @@ export default {
 
 		if (!info.success) return info;
 
-		context.$http.defaults.headers.common['Authorization'] = `Bearer ${token}`;
+		// eslint-disable-next-line no-param-reassign
+		context.$http.defaults.headers.common.Authorization = `Bearer ${token}`;
 		localStorage.setItem('id_token', token);
 		this.user.authenticated = true;
 

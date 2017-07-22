@@ -1,4 +1,5 @@
 const mongoose = require('mongoose');
+
 const Schema = mongoose.Schema;
 
 const ProjectSchema = new mongoose.Schema({
@@ -11,6 +12,6 @@ const ProjectSchema = new mongoose.Schema({
 	images: Array,
 });
 
-const Project = mongoose.model('Project', ProjectSchema);
+mongoose.model('Project', ProjectSchema);
 
 module.exports = ProjectSchema;

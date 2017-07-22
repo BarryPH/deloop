@@ -1,12 +1,12 @@
 const express = require('express');
-const router = express.Router();
 const multer = require('multer');
-const storage = multer.diskStorage({});
-const upload = multer({ storage });
 const ejwt = require('express-jwt');
 
+const router = express.Router();
+const storage = multer.diskStorage({});
+const upload = multer({ storage });
+
 const rootRequire = require.main.require;
-const middleware = rootRequire('./routes/middleware');
 const projects = rootRequire('./controllers/projects');
 const auth = rootRequire('./controllers/auth');
 const config = rootRequire('./config/config');

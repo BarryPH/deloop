@@ -5,8 +5,8 @@ const logger = require('morgan');
 const cors = require('cors');
 const bodyParser = require('body-parser');
 const passport = require('passport');
-
 const pkg = require('./package.json');
+
 const app = express();
 const rootRequire = require.main.require;
 const config = rootRequire('./config/config');
@@ -14,6 +14,7 @@ const config = rootRequire('./config/config');
 process.env.CLOUDINARY_URL = config.cloudinaryUrl;
 
 process.on('unhandledRejection', (reason) => {
+	// eslint-disable-next-line no-console
 	console.log('Unhandled Rejection:', reason);
 });
 
@@ -25,7 +26,7 @@ if (process.env.NODE_ENV !== 'prodution' && process.env.NODE_ENV !== 'test') {
 mongoose.Promise = global.Promise;
 
 mongoose.connect(config.mongoUri || `mongodb://localhost/${pkg.name}`, {
-	useMongoClient: true
+	useMongoClient: true,
 });
 require('./models');
 
@@ -39,7 +40,7 @@ rootRequire('./config/passport');
 
 app.use(rootRequire('./routes'));
 
-app.use((err, req, res, next) => {
+app.use((err, req, res) => {
 	if (err.name === 'UnauthorizedError') {
 		res.status(401).json({ errorMessage: 'Invalid authorization token.' });
 	}
@@ -50,6 +51,7 @@ async function main() {
 	await app.listen(port);
 
 	if (process.env.NODE_ENV !== 'test') {
+		// eslint-disable-next-line no-console
 		console.log(`Server is running on port: ${port}`);
 	}
 }

@@ -1,23 +1,23 @@
-import Vue from 'vue'
-import Router from 'vue-router'
-import Home from '@/components/Home'
-import Register from '@/components/Register'
-import Login from '@/components/Login'
-import Profile from '@/components/Profile'
-import Settings from '@/components/Settings'
-import Projects from '@/components/Projects'
-import ProjectNew from '@/components/ProjectNew'
+import Vue from 'vue';
+import Router from 'vue-router';
+import Home from '@/components/Home';
+import Register from '@/components/Register';
+import Login from '@/components/Login';
+import Profile from '@/components/Profile';
+import Settings from '@/components/Settings';
+import Projects from '@/components/Projects';
+import ProjectNew from '@/components/ProjectNew';
 
-Vue.use(Router)
+Vue.use(Router);
 
 export default new Router({
 	mode: 'history',
-  routes: [
-    {
-      path: '/',
-      name: 'Home',
-      component: Home,
-    },
+	routes: [
+		{
+			path: '/',
+			name: 'Home',
+			component: Home,
+		},
 		{
 			path: '/register',
 			name: 'Register',
@@ -48,5 +48,5 @@ export default new Router({
 			name: 'New Project',
 			component: ProjectNew,
 		},
-  ]
-})
+	],
+});

@@ -1,6 +1,5 @@
 <script>
 import auth from '@/auth';
-import axios from 'axios';
 
 export default {
 	name: 'login-page',
@@ -28,7 +27,7 @@ export default {
 			this.submitted = true;
 		},
 	},
-}
+};
 </script>
 
 <template>

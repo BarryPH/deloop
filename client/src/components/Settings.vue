@@ -1,6 +1,4 @@
 <script>
-import axios from 'axios';
-
 export default {
 	name: 'settings-page',
 	data() {
@@ -12,14 +10,9 @@ export default {
 				success: false,
 				message: '',
 			},
-		}
+		};
 	},
-	methods: {
-		async handleSubmit() {
-			console.log('submitted');
-		}
-	}
-}
+};
 </script>
 
 <template>
@@ -27,7 +20,7 @@ export default {
 		<div class='panel panel--bordered'>
 			<h3>Settings</h3>
 
-			<form v-on:submit.prevent='handleSubmit'>
+			<form>
 				<div v-show='submitted' v-bind:class='["formMessage", info.success ? "successMessage" : "errorMessage"]'>{{info.message}}</div>
 
 				<div class='form-group'>

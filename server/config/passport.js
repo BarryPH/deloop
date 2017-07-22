@@ -2,13 +2,11 @@ const LocalStrategy = require('passport-local').Strategy;
 const bcrypt = require('bcrypt');
 const passport = require('passport');
 const mongoose = require('mongoose');
-const User = mongoose.model('User');
-const Project = mongoose.model('Project');
 
-const returnErrorMessage = (done, message) => done(null, false, { message });
+const User = mongoose.model('User');
 
 async function findUserByEmail(email) {
-	const caseInsensitiveEmail = new RegExp('^' + email + '$', 'i');
+	const caseInsensitiveEmail = new RegExp(`^${email}$'`, 'i');
 	const user = await User.findOne({ email: caseInsensitiveEmail });
 
 	return user;
@@ -48,7 +46,7 @@ passport.use('local-login', new LocalStrategy({
 		return done(null, false, { message: invalidCrednentialsMessage });
 	}
 
-	done(null, user);
+	return done(null, user);
 }));
 
 passport.use('local-register', new LocalStrategy({
@@ -57,19 +55,19 @@ passport.use('local-register', new LocalStrategy({
 	passReqToCallback: true,
 }, async (req, email, password, done) => {
 	const existingUser = await findUserByEmail(email);
-	if (existingUser) return done(null, false, { message: 'Email is already in use by another account'});
+	if (existingUser) return done(null, false, { message: 'Email is already in use by another account' });
 
 	req.checkBody('email', 'A valid email is required.').isEmail();
 	req.checkBody('password', 'Password must be at least 8 characters long.').isLength({ min: 8 });
 	req.checkBody('password', 'Passwords do not match').equals(req.body.password2);
 
 	const validationErrors = req.validationErrors();
-	if (validationErrors) return done(null, false, { message: validationErrors[0].msg});
+	if (validationErrors) return done(null, false, { message: validationErrors[0].msg });
 
 	const user = await createUser({
 		email,
 		password,
 	});
 
-	done(null, user);
+	return done(null, user);
 }));
