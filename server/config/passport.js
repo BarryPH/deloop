@@ -5,6 +5,11 @@ const mongoose = require('mongoose');
 
 const User = mongoose.model('User');
 
+/**
+ * Return user with provided email (case-insensitive)
+ * @param {string} email Email to search by
+ * @returns {object}
+ */
 async function findUserByEmail(email) {
 	const caseInsensitiveEmail = new RegExp(`^${email}$`, 'i');
 	const user = await User.findOne({ email: caseInsensitiveEmail });
@@ -12,12 +17,13 @@ async function findUserByEmail(email) {
 	return user;
 }
 
-async function comparePasswords(passwordOne, passwordTwo) {
-	const doPasswordsMatch = await bcrypt.compare(passwordOne, passwordTwo);
-
-	return doPasswordsMatch;
-}
-
+/**
+ * Create a new user with provided user object
+ * @param {object} user
+ * @param {string} user.email
+ * @param {string} user.password
+ * @returns {object}
+ */
 async function createUser({ email, password }) {
 	const hash = await bcrypt.hash(password, 10);
 	const user = new User({
@@ -43,7 +49,7 @@ passport.use('local-login', new LocalStrategy({
 
 	if (!user) return done(null, false, { message: invalidCrednentialsMessage });
 
-	const doPasswordsMatch = await comparePasswords(password, user.password);
+	const doPasswordsMatch = await bcrypt.compare(password, user.password);
 
 	if (!doPasswordsMatch) return done(null, false, { message: invalidCrednentialsMessage });
 
