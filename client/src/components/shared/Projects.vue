@@ -1,6 +1,4 @@
 <script>
-import axios from 'axios';
-
 export default {
 	name: 'projects',
 	props: {
@@ -17,7 +15,7 @@ export default {
 	},
 	methods: {
 		async fetchData() {
-			const { data: projects } = await axios.get('http://localhost:3000/projects');
+			const { data: projects } = await this.$http.get('/projects');
 			this.projects = projects;
 		},
 	},

@@ -1,5 +1,4 @@
 <script>
-import axios from 'axios';
 import auth from '@/auth.js';
 import utils from '@/utils.js';
 
@@ -22,13 +21,13 @@ export default {
 	},
 	methods: {
 		async fetchUserData() {
-			const { data: user } = await axios.get('http://localhost:3000/user');
+			const { data: user } = await this.$http.get('/user');
 			this.user = user;
 		},
 		async handleSubmit(event) {
 			const JSONFormData = utils.formToJSON(event.target);
 
-			const { data: { token, info } } = await axios.post('http://localhost:3000/user', JSONFormData);
+			const { data: { token, info } } = await this.$http.post('/user', JSONFormData);
 
 			this.info = info;
 			auth.setToken(token);
