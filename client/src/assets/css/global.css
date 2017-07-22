@@ -175,12 +175,24 @@ input:not([type=file]), select, textarea {
 }
 
 @media (max-width: 1060px) {
-	.container--sm, .container--md, .container, .container--lg {
+	.container, .container--lg {
 		padding: var(--container-padding-sm);
 	}
 
 	.section-header {
 		margin-bottom: var(--container-padding-sm);
+	}
+}
+
+@media (max-width: 800px) {
+	.container--md {
+		padding: var(--container-padding-sm);
+	}
+}
+
+@media (max-width: 600px) {
+	.container--sm {
+		padding: var(--container-padding-sm);
 	}
 }
 
@@ -196,7 +208,7 @@ input:not([type=file]), select, textarea {
 
 @media (max-width: 1060px) {
 	.panel {
-		padding: 1.5rem;
+		padding: 2rem;
 	}
 }
 
