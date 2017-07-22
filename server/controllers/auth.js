@@ -48,7 +48,7 @@ module.exports.register = async (req, res, next) => {
 
 	await promisifiedReqLogin(req, user);
 
-	const token = jwt.sign(user, config.superSecret);
+	const token = jwt.sign(user.toObject(), config.superSecret);
 	const response = Object.assign({}, user.toObject(), {
 		token,
 		info: {
@@ -72,7 +72,7 @@ module.exports.login = async (req, res, next) => {
 		});
 	}
 
-	const token = jwt.sign(user, config.superSecret);
+	const token = jwt.sign(user.toObject(), config.superSecret);
 	const response = Object.assign({}, user.toObject(), {
 		token,
 		info: {

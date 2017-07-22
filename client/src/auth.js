@@ -44,6 +44,9 @@ export default {
 
 		context.$router.push('/');
 	},
+	setToken(token) {
+		localStorage.setItem('id_token', token);
+	},
 	checkAuth() {
 		const token = localStorage.getItem('id_token');
 		return !!token;

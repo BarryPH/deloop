@@ -6,7 +6,7 @@ const mongoose = require('mongoose');
 const User = mongoose.model('User');
 
 async function findUserByEmail(email) {
-	const caseInsensitiveEmail = new RegExp(`^${email}$'`, 'i');
+	const caseInsensitiveEmail = new RegExp(`^${email}$`, 'i');
 	const user = await User.findOne({ email: caseInsensitiveEmail });
 
 	return user;
@@ -40,11 +40,12 @@ passport.use('local-login', new LocalStrategy({
 }, async (req, email, password, done) => {
 	const invalidCrednentialsMessage = 'Invalid email or password';
 	const user = await findUserByEmail(email);
+
+	if (!user) return done(null, false, { message: invalidCrednentialsMessage });
+
 	const doPasswordsMatch = await comparePasswords(password, user.password);
 
-	if (!user || !doPasswordsMatch) {
-		return done(null, false, { message: invalidCrednentialsMessage });
-	}
+	if (!doPasswordsMatch) return done(null, false, { message: invalidCrednentialsMessage });
 
 	return done(null, user);
 }));

@@ -1,16 +1,38 @@
 <script>
+import axios from 'axios';
+import auth from '@/auth.js';
+import utils from '@/utils.js';
+
 export default {
 	name: 'settings-page',
 	data() {
 		return {
-			name: '',
-			email: '',
-			submtited: false,
+			user: {
+				name: '',
+				email: '',
+			},
 			info: {
 				success: false,
 				message: '',
 			},
 		};
+	},
+	created() {
+		this.fetchUserData();
+	},
+	methods: {
+		async fetchUserData() {
+			const { data: user } = await axios.get('http://localhost:3000/user');
+			this.user = user;
+		},
+		async handleSubmit(event) {
+			const JSONFormData = utils.formToJSON(event.target);
+
+			const { data: { token, info } } = await axios.post('http://localhost:3000/user', JSONFormData);
+
+			this.info = info;
+			auth.setToken(token);
+		},
 	},
 };
 </script>
@@ -20,12 +42,12 @@ export default {
 		<div class='panel panel--bordered'>
 			<h3>Settings</h3>
 
-			<form>
-				<div v-show='submitted' v-bind:class='["formMessage", info.success ? "successMessage" : "errorMessage"]'>{{info.message}}</div>
+			<form @submit.prevent='handleSubmit'>
+				<div v-show='info' v-bind:class='["formMessage", info.success ? "successMessage" : "errorMessage"]'>{{info.message}}</div>
 
 				<div class='form-group'>
-					<input placeholder='Full Name' name='name' v-model='name'>
-					<input placeholder='Email' name='email' v-model='email'>
+					<input placeholder='Full Name' name='name' v-model='user.name'>
+					<input placeholder='Email' name='email' v-model='user.email'>
 					<router-link to='/reset-password' class='password-reset'>Reset password &rarr;</router-link>
 				</div>
 

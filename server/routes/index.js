@@ -1,19 +1,19 @@
 const express = require('express');
 const multer = require('multer');
-const ejwt = require('express-jwt');
 
 const router = express.Router();
 const storage = multer.diskStorage({});
 const upload = multer({ storage });
 
 const rootRequire = require.main.require;
+const middleware = rootRequire('./routes/middleware.js');
 const projects = rootRequire('./controllers/projects');
+const user = rootRequire('./controllers/user');
 const auth = rootRequire('./controllers/auth');
-const config = rootRequire('./config/config');
 
 router.route('/projects')
 	.get(projects.read)
-	.post(ejwt({ secret: config.superSecret }))
+	.post(middleware.ensureValidJwt)
 	.post(upload.array('projectImages'), projects.create);
 
 router.route('/register')
@@ -24,5 +24,12 @@ router.route('/login')
 
 router.route('/logout')
 	.post(auth.logout);
+
+router.route('/user')
+	.all(middleware.ensureValidJwt)
+	.all(middleware.ensureSignedIn)
+	.get(user.read)
+	.post(user.update)
+	.post(middleware.ensureValidJwt);
 
 module.exports = router;
