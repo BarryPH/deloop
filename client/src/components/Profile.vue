@@ -17,7 +17,7 @@ export default {
 
 <template>
 	<div class='container'>
-		<div v-if='auth.user.authenticated' class='settings-link'>
+		<div v-if='auth.user.id' class='settings-link'>
 			<router-link to='/settings'>Edit settings &rarr;</router-link>
 		</div>
 

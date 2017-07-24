@@ -24,7 +24,7 @@ export default {
 			<router-link to='/projects'>Projects</router-link>
 			<router-link to='/why'>Why Deloop?</router-link>
 
-			<span v-if='auth.user.authenticated'>
+			<span v-if='auth.user.id'>
 			<router-link :to='`/profile/${auth.user.id}`'>Profile</router-link>
 				<a v-on:click='logout()'>Logout</a>
 			</span>

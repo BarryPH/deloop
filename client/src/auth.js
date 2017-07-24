@@ -1,6 +1,5 @@
 export default {
 	user: {
-		authenticated: !!localStorage.getItem('id_token'),
 		id: localStorage.getItem('user_id'),
 	},
 
@@ -16,7 +15,6 @@ export default {
 		localStorage.setItem('user_id', id);
 
 		this.user = {
-			authenticated: true,
 			id,
 		};
 
@@ -40,7 +38,6 @@ export default {
 		localStorage.setItem('user_id', id);
 
 		this.user = {
-			authenticated: true,
 			id,
 		};
 
@@ -55,8 +52,9 @@ export default {
 		context.$http.post('/logout');
 
 		localStorage.removeItem('id_token');
+		localStorage.removeItem('user_id');
 
-		this.user.authenticated = false;
+		this.user = {};
 
 		// eslint-disable-next-line no-param-reassign
 		delete context.$http.defaults.headers.common.Authorization;
