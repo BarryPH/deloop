@@ -9,8 +9,8 @@ export default {
 		<h2 class='hero-headline'>A place for designers <br> to give and recieve feedback</h2>
 
 		<nav>
-			<a class='fill color-primary' href='/projects'>View Projects</a>
-			<a href='/register'>Register <span class='icon'>&rarr;</span></a>
+			<router-link class='fill color-primary' to='/projects'>View Projects</router-link>
+			<router-link to='/register'>Register <span class='icon'>&rarr;</span></router-link>
 		</nav>
 	</div>
 </template>

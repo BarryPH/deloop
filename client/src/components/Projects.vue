@@ -19,7 +19,7 @@ export default {
 			<Projects />
 
 			<div class='text-center'>
-				<a href='/projects'>View more <span class='icon'>&rarr;</span></a>
+				<router-link to='/projects'>View more <span class='icon'>&rarr;</span></router-link>
 			</div>
 		</div>
 	</div>

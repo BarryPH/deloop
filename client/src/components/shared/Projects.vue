@@ -25,23 +25,23 @@ export default {
 <template>
 	<div class='projects' :class='[clear ? "clear" : null]'>
 		<div v-for='project in projects' class='project'>
-			<a :href='"/projects/" + project._id'>
+			<router-link :to='`/projects/${project._id}`'>
 				<img :src='project.images[0].url'>
-			</a>
+			</router-link>
 
-			<a :href='"/projects/" + project._id'>
+			<router-link :to='`/projects/${project._id}`'>
 				<header class='title'>{{project.title}}</header>
-			</a>
+			</router-link>
 		</div>
 
 		<div class='project addNew'>
-			<a href='/projects/new'>
+			<router-link to='/projects/new'>
 				<img src='http://via.placeholder.com/350x200'>
-			</a>
+			</router-link>
 
-			<a href='/projects/new'>
+			<router-link to='/projects/new'>
 				<header class='title'>Add new project</header>
-			</a>
+			</router-link>
 		</div>
 	</div>
 </template>
