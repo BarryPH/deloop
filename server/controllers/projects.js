@@ -6,8 +6,13 @@ const Project = mongoose.model('Project');
 const ObjectId = mongoose.Types.ObjectId;
 
 module.exports.read = async (req, res) => {
-	const projects = await Project.find({ author: ObjectId(req.user._id) })
-		.exec();
+	let projectsQuery = Project.find()
+
+	if (req.query.author) {
+		projectsQuery.where({ author: ObjectId(req.user._id) });
+	}
+
+	const projects = await projectsQuery.exec();
 
 	res.json(projects);
 };

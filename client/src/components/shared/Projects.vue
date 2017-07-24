@@ -4,6 +4,7 @@ export default {
 	props: {
 		clear: Boolean,
 		addNew: Boolean,
+		author: String,
 	},
 	data() {
 		return {
@@ -15,7 +16,13 @@ export default {
 	},
 	methods: {
 		async fetchData() {
-			const { data: projects } = await this.$http.get('/projects');
+			let params = {};
+
+			if (this.author) {
+				params.author = this.author;
+			}
+
+			const { data: projects } = await this.$http.get('/projects', { params });
 			this.projects = projects;
 		},
 	},

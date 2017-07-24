@@ -7,6 +7,11 @@ export default {
 	components: {
 		Projects,
 	},
+	data() {
+		return {
+			auth,
+		};
+	},
 	computed: {
 		user() {
 			return this.$store.state.users[auth.user.id];
@@ -42,7 +47,7 @@ export default {
 				</a>
 			</div>
 
-			<Projects clear />
+			<Projects :author='$route.params.id' clear />
 		</div>
 	</div>
 </template>
