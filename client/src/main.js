@@ -4,9 +4,11 @@ import Vue from 'vue';
 import axios from 'axios';
 import App from './App';
 import router from './router';
+import store from './store';
 import './assets/css/global.css';
 
-axios.defaults.headers.common.Authorization = `Bearer ${localStorage.getItem('id_token')}`;
+const jwtToken = localStorage.getItem('id_token');
+if (jwtToken) axios.defaults.headers.common.Authorization = `Bearer ${jwtToken}`;
 axios.defaults.baseURL = 'http://localhost:3000';
 
 Vue.prototype.$http = axios;
@@ -18,4 +20,5 @@ new Vue({
 	router,
 	template: '<App/>',
 	components: { App },
+	store,
 });

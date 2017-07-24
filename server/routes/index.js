@@ -8,11 +8,11 @@ const upload = multer({ storage });
 const rootRequire = require.main.require;
 const middleware = rootRequire('./routes/middleware.js');
 const projects = rootRequire('./controllers/projects');
-const user = rootRequire('./controllers/user');
+const users = rootRequire('./controllers/users');
 const auth = rootRequire('./controllers/auth');
 
 router.route('/projects')
-	.all(middleware.ensureValidJwt)
+	.all(middleware.serializeUser)
 	.get(projects.read)
 	.post(upload.array('projectImages'), projects.create);
 
@@ -25,11 +25,10 @@ router.route('/login')
 router.route('/logout')
 	.post(auth.logout);
 
-router.route('/user')
-	.all(middleware.ensureValidJwt)
-	.all(middleware.ensureSignedIn)
-	.get(user.read)
-	.post(user.update)
-	.post(middleware.ensureValidJwt);
+router.route('/users/:id')
+	.all(middleware.serializeUser)
+	.get(users.read)
+	.post(middleware.ensureUserOfId)
+	.post(users.update);
 
 module.exports = router;

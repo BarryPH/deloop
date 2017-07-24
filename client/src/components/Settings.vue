@@ -6,10 +6,7 @@ export default {
 	name: 'settings-page',
 	data() {
 		return {
-			user: {
-				name: '',
-				email: '',
-			},
+			user: {},
 			info: {
 				success: false,
 				message: '',
@@ -21,15 +18,18 @@ export default {
 	},
 	methods: {
 		async fetchUserData() {
-			const { data: user } = await this.$http.get('/user');
-			this.user = user;
+			const user = await this.$store.dispatch('FETCH_USER', { id: auth.user.id });
+			this.user = JSON.parse(JSON.stringify(user));
 		},
 		async handleSubmit(event) {
 			const JSONFormData = utils.formToJSON(event.target);
-			const { data: { token, info } } = await this.$http.post('/user', JSONFormData);
+			const { data: { token, user, info } } = await this.$http.post(`/users/${auth.user.id}`, JSONFormData);
 
 			this.info = info;
 			auth.setToken(token);
+
+			// eslint-disable-next-line no-underscore-dangle
+			this.$store.commit('SET_USER', { id: user._id, user });
 		},
 	},
 };

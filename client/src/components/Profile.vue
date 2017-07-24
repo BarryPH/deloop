@@ -10,17 +10,7 @@ export default {
 	data() {
 		return {
 			auth,
-			user: {},
 		};
-	},
-	created() {
-		this.getUserData();
-	},
-	methods: {
-		async getUserData() {
-			const { data: user } = await this.$http.get('/user');
-			this.user = user;
-		},
 	},
 };
 </script>
@@ -31,7 +21,7 @@ export default {
 			<router-link to='/settings'>Edit settings &rarr;</router-link>
 		</div>
 
-		<Profile :user='user' />
+		<Profile />
 	</div>
 </template>
 

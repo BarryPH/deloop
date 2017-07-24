@@ -22,8 +22,10 @@ function filterObject(dirtyObject, keyWhiteList) {
 }
 
 module.exports.read = async (req, res) => {
+	const user = await User.findOne({ _id: req.params.id })
+		.exec();
 	const keyWhiteList = ['name', 'email', 'website'];
-	const cleanUser = filterObject(req.user, keyWhiteList);
+	const cleanUser = filterObject(user.toObject(), keyWhiteList);
 
 	res.json(cleanUser);
 };
@@ -35,9 +37,12 @@ module.exports.update = async (req, res) => {
 		{ new: true },
 	);
 
-	const token = jwt.sign(user.toObject(), config.superSecret);
+	const userJSON = user.toObject();
+	const token = jwt.sign(userJSON, config.superSecret);
+
 	res.json({
 		token,
+		user: userJSON,
 		info: {
 			success: true,
 			message: 'Your settings have been updated',

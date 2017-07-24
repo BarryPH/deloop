@@ -1,19 +1,25 @@
 <script>
 import Projects from '@/components/shared/Projects.vue';
+import auth from '@/auth.js';
 
 export default {
 	name: 'profile',
 	components: {
 		Projects,
 	},
-	props: {
-		user: Object,
+	computed: {
+		user() {
+			return this.$store.state.users[auth.user.id];
+		},
+	},
+	async created() {
+		this.$store.dispatch('FETCH_USER', { id: auth.user.id });
 	},
 };
 </script>
 
 <template>
-	<div class='panels-wrapper'>
+	<div v-if='user' class='panels-wrapper'>
 		<div class='panel panel--bordered user-sidebar'>
 			<div class='text-center'>
 				<img class='headshot' src='http://creatingrealities.com/wp-content/uploads/2017/02/Loveleen-Kaur-Kang-Headshot-Square-300x300.jpg'>

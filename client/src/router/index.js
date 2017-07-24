@@ -3,7 +3,7 @@ import Router from 'vue-router';
 import Home from '@/components/Home';
 import Register from '@/components/Register';
 import Login from '@/components/Login';
-import OwnProfile from '@/components/OwnProfile';
+import Profile from '@/components/Profile';
 import Settings from '@/components/Settings';
 import Projects from '@/components/Projects';
 import ProjectNew from '@/components/ProjectNew';
@@ -29,9 +29,9 @@ export default new Router({
 			component: Login,
 		},
 		{
-			path: '/profile',
-			name: 'Own-Profile',
-			component: OwnProfile,
+			path: '/profile/:id',
+			name: 'Profile',
+			component: Profile,
 		},
 		{
 			path: '/settings',

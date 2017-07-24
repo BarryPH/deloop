@@ -1,13 +1,13 @@
-const faker = require('faker');
 const cloudinary = require('cloudinary');
 const mongoose = require('mongoose');
 const { promisify } = require('util');
 
 const Project = mongoose.model('Project');
+const ObjectId = mongoose.Types.ObjectId;
 
 module.exports.read = async (req, res) => {
-	const projects = await Project.find({ author: req.user })
-	.exec();
+	const projects = await Project.find({ author: ObjectId(req.user._id) })
+		.exec();
 
 	res.json(projects);
 };
