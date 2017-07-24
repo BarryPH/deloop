@@ -12,8 +12,8 @@ const user = rootRequire('./controllers/user');
 const auth = rootRequire('./controllers/auth');
 
 router.route('/projects')
+	.all(middleware.ensureValidJwt)
 	.get(projects.read)
-	.post(middleware.ensureValidJwt)
 	.post(upload.array('projectImages'), projects.create);
 
 router.route('/register')

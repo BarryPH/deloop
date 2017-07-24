@@ -26,7 +26,7 @@ export default {
 	<div class='projects' :class='[clear ? "clear" : null]'>
 		<div v-for='project in projects' class='project'>
 			<a :href='"/projects/" + project._id'>
-				<img :src='project.featureImage.url'>
+				<img :src='project.images[0].url'>
 			</a>
 
 			<a :href='"/projects/" + project._id'>
