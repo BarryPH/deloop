@@ -18,7 +18,7 @@ export default {
 
 <template>
 	<div class='container site-header'>
-		<div class='logo'>Deloop</div>
+		<router-link to='/' class='logo color-primary'>Deloop</router-link>
 		<nav>
 			<router-link to='/'>Home</router-link>
 			<router-link to='/projects'>Projects</router-link>
@@ -30,7 +30,7 @@ export default {
 			</span>
 			<span v-else>
 				<router-link to='/login'>Login</router-link>
-				<router-link to='/register' class='bordered'>Register</router-link>
+				<router-link to='/register' class='color-primary'><span class='icon icon-left'>&#10148;</span>Register</router-link>
 			</span>
 		</nav>
 	</div>
@@ -49,11 +49,7 @@ export default {
 .logo {
 	font-weight: bold;
 	font-size: 1.2rem;
-}
-
-nav a:not {
-	min-width: 500px;
-	max-width: 100%;
+	text-transform: uppercase;
 }
 
 nav a:not(:last-child) {

@@ -74,32 +74,37 @@ a {
 	color: inherit;
 }
 
-a.link {
+.link {
 	color: var(--color-primary-blue);
 }
 
-a.fill, button.fill {
+.fill {
 	background-color: var(--font-color);
 	color: #fff;
 	padding: 0.7rem 1.5rem;
 }
 
-a.fill-go, button.fill-go {
+.fill-go {
 	background-color: var(--color-secondary-green);
 }
 
-a.color-primary {
+.color-primary {
 	color: var(--color-primary);
 }
 
-a.bordered, button.bordered {
+.bordered {
 	border: 2px solid #fff;
-	padding: 0.2rem 0.5rem;
+	padding: 0.2rem 0.8rem;
 }
 
-a span.icon {
+span.icon {
 	margin-left: 0.5rem;
 	font-weight: bold;
+}
+
+span.icon-left {
+	margin-left: 0rem;
+	margin-right: 0.5rem;
 }
 
 p {

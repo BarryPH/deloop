@@ -10,17 +10,19 @@ export default {
 
 		<nav>
 			<router-link class='fill color-primary' to='/projects'>View Projects</router-link>
-			<router-link to='/register'>Register <span class='icon'>&rarr;</span></router-link>
+			<router-link to='/register'>Register <span class='icon'>&#10148;</span></router-link>
 		</nav>
 	</div>
 </template>
 
 <style scoped>
 .hero {
-	padding-top: 7rem;
-	padding-bottom: 7rem;
 	background-color: var(--color-primary);
 	text-align: center;
+	min-height: 50vh;
+	display: flex;
+	justify-content: center;
+	flex-direction: column;
 }
 
 .hero-headline {
