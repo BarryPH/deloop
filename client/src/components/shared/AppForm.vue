@@ -10,9 +10,7 @@ export default {
 	data() {
 		return {
 			loading: false,
-			submitted: false,
-			success: false,
-			message: '',
+			status: {},
 		};
 	},
 	methods: {
@@ -22,9 +20,8 @@ export default {
 			const { success, message } = await this.submit(event);
 
 			this.loading = false;
-			this.success = success;
-			this.message = message;
-			this.submitted = true;
+			this.status.success = success;
+			this.status.message = message;
 		},
 	},
 };
@@ -37,7 +34,7 @@ export default {
 		<h3>{{title}}</h3>
 
 		<form v-on:submit.prevent='handleSubmit' enctype={enctype}>
-			<div v-show='submitted' v-bind:class='["formMessage", success ? "successMessage" : "errorMessage"]'>{{message}}</div>
+			<div v-show='this.status.message' v-bind:class='["formMessage", status.success ? "successMessage" : "errorMessage"]'>{{status.message}}</div>
 
 			<slot />
 
