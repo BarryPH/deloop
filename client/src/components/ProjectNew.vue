@@ -1,18 +1,10 @@
 <script>
+import AppForm from '@/components/shared/AppForm.vue';
+
 export default {
 	name: 'project-new-page',
-	data() {
-		return {
-			fieldImages: {
-				fieldName: '',
-				fileList: [],
-			},
-			submitted: false,
-			info: {
-				success: false,
-				message: 'Please submit the form',
-			},
-		};
+	components: {
+		AppForm,
 	},
 	methods: {
 		async handleSubmit(event) {
@@ -21,8 +13,7 @@ export default {
 
 			const { data: { info } } = await this.$http.post('/projects', formData);
 
-			this.info = info;
-			this.submitted = true;
+			return info;
 		},
 	},
 };
@@ -30,34 +21,24 @@ export default {
 
 <template>
 	<div class='container--md'>
-		<div class='panel panel--bordered'>
-			<h3>New Project</h3>
+		<AppForm
+			enctype='multipart/form-data'
+			title='New Project'
+			:submit='handleSubmit'
+			buttonText='Create'
+		>
+			<div class='form-group'>
+				<input placeholder='Title' name='title'>
+				<input placeholder='Tags, comma seperated (music, sports)' name='tags'>
+			</div>
 
-			<form enctype='multipart/form-data' v-on:submit.prevent='handleSubmit'>
-				<div v-show='submitted' v-bind:class='["formMessage", info.success ? "successMessage" : "errorMessage"]'>{{info.message}}</div>
-
-				<div class='form-group'>
-					<input placeholder='Title' name='title'>
-					<input placeholder='Tags, comma seperated (music, sports)' name='tags'>
-				</div>
-
-				<div class='form-group'>
-					<h5>Project images</h5>
-					<input type='file' multiple name='projectImages'>
-				</div>
-
-				<button class='fill' type='submit'>Create</button>
-			</form>
-		</div>
+			<div class='form-group'>
+				<h5>Project images</h5>
+				<input type='file' multiple name='projectImages'>
+			</div>
+		</AppForm>
 	</div>
 </template>
 
 <style scoped>
-form {
-	margin-top: 2rem;
-}
-
-.formMessage {
-	margin-bottom: 2rem;
-}
 </style>

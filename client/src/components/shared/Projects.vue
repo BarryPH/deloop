@@ -16,7 +16,7 @@ export default {
 	},
 	methods: {
 		async fetchData() {
-			let params = {};
+			const params = {};
 
 			if (this.author) {
 				params.author = this.author;

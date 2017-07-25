@@ -3,8 +3,9 @@
 	--color-primary-shade: #149dff;
 	--color-primary-grey: #f2f2f2;
 	--color-primary-green: #42db41;
-	--color-primary-blue: #007fff;
 	--color-secondary-green: #6aff69;
+	--color-primary-blue: #007fff;
+	--color-primary-red: #db1f1f99;
 
 	--font: 'Lato';
 	--font-header: 'Lato';
@@ -84,7 +85,7 @@ a.fill, button.fill {
 }
 
 a.fill-go, button.fill-go {
-	background-color: var(--color-primary-green);
+	background-color: var(--color-secondary-green);
 }
 
 a.color-primary {
@@ -217,11 +218,15 @@ input:not([type=file]), select, textarea {
 }
 
 .successMessage {
-	color: #42db41;
+	padding: 0.7rem 1.5rem;
+	background-color: var(--color-secondary-green);
+	color: #fff;
 }
 
 .errorMessage {
-	color: red;
+	padding: 0.7rem 1.5rem;
+	background-color: var(--color-primary-red);
+	color: #fff;
 }
 
 .form-group {
