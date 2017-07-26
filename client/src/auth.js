@@ -20,7 +20,7 @@ export default {
 
 		// eslint-disable-next-line no-param-reassign
 		context.$http.defaults.headers.common.Authorization = `Bearer ${token}`;
-		context.$router.push('/');
+		context.$router.push({ name: 'Profile', params: { id }});
 
 		return info;
 	},
@@ -43,7 +43,7 @@ export default {
 
 		// eslint-disable-next-line no-param-reassign
 		context.$http.defaults.headers.common.Authorization = `Bearer ${token}`;
-		context.$router.push('/');
+		context.$router.push({ name: 'Profile', params: { id }});
 
 		return info;
 	},
