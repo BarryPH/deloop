@@ -18,19 +18,17 @@ export default {
 			const files = event.target.files;
 			const keys = Object.keys(files);
 
-			keys.forEach(key => {
+			keys.forEach((key) => {
 				const fileReader = new FileReader();
 
-				fileReader.onload = (e) => {
-					// Array.push is not detectable by Vue so splice instead
-					this.images.splice(-1, 0, e.target.result);
-				}
+				// Array.push is not detectable by Vue so splice instead
+				fileReader.onload = e => this.images.splice(-1, 0, e.target.result);
 
 				fileReader.readAsDataURL(files[key]);
 			});
-		}
+		},
 	},
-}
+};
 </script>
 
 <template>

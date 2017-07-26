@@ -5,17 +5,21 @@ import AppForm from '@/components/shared/AppForm.vue';
 
 export default {
 	name: 'settings-page',
+
 	components: {
 		AppForm,
 	},
+
 	data() {
 		return {
 			user: {},
 		};
 	},
+
 	created() {
 		this.fetchUserData();
 	},
+
 	methods: {
 		async fetchUserData() {
 			const user = await this.$store.dispatch('FETCH_USER', { id: auth.user.id });

@@ -3,11 +3,13 @@ import auth from '@/auth';
 
 export default {
 	name: 'header',
+
 	data() {
 		return {
 			auth,
 		};
 	},
+
 	methods: {
 		async logout() {
 			auth.logout(this);

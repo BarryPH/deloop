@@ -5,21 +5,25 @@ import auth from '@/auth';
 
 export default {
 	name: 'profile-page',
+
 	components: {
 		Projects,
 		Settings,
 	},
+
 	data() {
 		return {
 			auth,
 			section: 'projects',
 		};
 	},
+
 	computed: {
 		user() {
 			return this.$store.state.users[this.$route.params.id];
 		},
 	},
+
 	async created() {
 		this.$store.dispatch('FETCH_USER', { id: this.$route.params.id });
 	},

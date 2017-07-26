@@ -1,19 +1,23 @@
 <script>
 export default {
 	name: 'projects',
+
 	props: {
 		clear: Boolean,
 		addNew: Boolean,
 		author: String,
 	},
+
 	data() {
 		return {
 			projects: [],
 		};
 	},
+
 	created() {
 		this.fetchData();
 	},
+
 	methods: {
 		async fetchData() {
 			const params = {};

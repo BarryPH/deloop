@@ -5,7 +5,7 @@ export default {
 	data() {
 		return {
 			project: {},
-		}
+		};
 	},
 
 	created() {
@@ -19,9 +19,9 @@ export default {
 			};
 			const { data: project } = await this.$http.get('/projects', { params });
 			this.project = project;
-		}
+		},
 	},
-}
+};
 </script>
 
 <template>

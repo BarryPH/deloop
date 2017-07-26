@@ -5,9 +5,11 @@ import AppForm from '@/components/shared/AppForm.vue';
 
 export default {
 	name: 'login-page',
+
 	components: {
 		AppForm,
 	},
+
 	methods: {
 		async handleSubmit(event) {
 			const JSONFormData = utils.formToJSON(event.target);

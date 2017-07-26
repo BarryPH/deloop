@@ -28,7 +28,7 @@ module.exports.read = async (req, res) => {
 	const projects = await projectsQuery.exec();
 
 
-	req.query.id
+	return req.query.id
 		? res.json(projects[0])
 		: res.json(projects);
 };

@@ -4,6 +4,7 @@ import Projects from '@/components/shared/Projects.vue';
 
 export default {
 	name: 'home-page',
+
 	components: {
 		Hero,
 		Projects,

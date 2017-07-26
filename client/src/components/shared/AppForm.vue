@@ -1,18 +1,21 @@
 <script>
 export default {
 	name: 'App-Form',
+
 	props: {
 		submit: Function,
 		buttonText: String,
 		title: String,
 		enctype: String,
 	},
+
 	data() {
 		return {
 			loading: false,
 			status: {},
 		};
 	},
+
 	methods: {
 		async handleSubmit(event) {
 			this.loading = true;
