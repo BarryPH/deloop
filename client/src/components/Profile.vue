@@ -17,11 +17,11 @@ export default {
 	},
 	computed: {
 		user() {
-			return this.$store.state.users[auth.user.id];
+			return this.$store.state.users[this.$route.params.id];
 		},
 	},
 	async created() {
-		this.$store.dispatch('FETCH_USER', { id: auth.user.id });
+		this.$store.dispatch('FETCH_USER', { id: this.$route.params.id });
 	},
 };
 </script>
@@ -56,7 +56,7 @@ export default {
 
 			<div class='panel content'>
 				<div v-if='section === "projects"'>
-					<Projects :author='$route.params.id' clear />
+					<Projects :author='$route.params.id' clear :addNew='$route.params.id === auth.user.id' />
 				</div>
 
 				<Settings v-else-if='section === "settings"' />

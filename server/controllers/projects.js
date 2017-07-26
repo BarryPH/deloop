@@ -13,7 +13,7 @@ module.exports.read = async (req, res) => {
 	}
 
 	if (req.query.author) {
-		projectsQuery.where({ author: ObjectId(req.user._id) });
+		projectsQuery.where({ author: ObjectId(req.query.author) });
 	}
 
 	const projects = await projectsQuery.exec();

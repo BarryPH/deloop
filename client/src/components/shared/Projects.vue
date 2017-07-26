@@ -31,6 +31,16 @@ export default {
 
 <template>
 	<div class='projects' :class='[clear ? "clear" : null]'>
+		<div v-if='addNew' class='project addNew'>
+			<router-link to='/projects/new'>
+				<img src='http://via.placeholder.com/350x200'>
+			</router-link>
+
+			<router-link to='/projects/new'>
+				<header class='title'>Add new project</header>
+			</router-link>
+		</div>
+
 		<div v-for='project in projects' class='project'>
 			<router-link :to='`/projects/${project._id}`'>
 				<img :src='project.images[0] && project.images[0].url'>
@@ -38,16 +48,6 @@ export default {
 
 			<router-link :to='`/projects/${project._id}`'>
 				<header class='title'>{{project.title}}</header>
-			</router-link>
-		</div>
-
-		<div class='project addNew'>
-			<router-link to='/projects/new'>
-				<img src='http://via.placeholder.com/350x200'>
-			</router-link>
-
-			<router-link to='/projects/new'>
-				<header class='title'>Add new project</header>
 			</router-link>
 		</div>
 	</div>
