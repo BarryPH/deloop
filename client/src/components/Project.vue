@@ -29,6 +29,9 @@ export default {
 		<div class='panel'>
 			<h2>{{project.title}}</h2>
 			<p>{{project.description}}</p>
+			<div class='tags'>
+				<a v-for='tag in project.tags' :href='"/projects?tag=${tag}"'>{{tag}}</a>
+			</div>
 		</div>
 
 		<div v-for='image in project.images' class='panel'>
@@ -40,5 +43,15 @@ export default {
 <style scoped>
 .panel {
 	margin-bottom: 2rem;
+}
+
+.tags {
+	margin-top: 1rem;
+	opacity: 0.8;
+	color: var(--color-primary-blue);
+}
+
+.tags a:not(:last-child) {
+	margin-right: 1rem;
 }
 </style>
