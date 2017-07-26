@@ -5,6 +5,15 @@ const { promisify } = require('util');
 const Project = mongoose.model('Project');
 const ObjectId = mongoose.Types.ObjectId;
 
+/**
+ * Returns a list of optionally filtered projects
+ * If the id query is passed returns a single project object instead of an array
+ *
+ * @param {Object} req
+ * @param {String} req.id
+ * @param {String} req.author
+ * @returns {(Array|Object)}
+ */
 module.exports.read = async (req, res) => {
 	const projectsQuery = Project.find();
 
