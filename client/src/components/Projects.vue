@@ -12,15 +12,13 @@ export default {
 </script>
 
 <template>
-	<div>
-		<div class='container'>
-			<h3 class='section-header text-center'>Projects<hr></h3>
+	<div class='container'>
+		<h3 class='section-header text-center'>Projects<hr></h3>
 
-			<Projects />
+		<Projects />
 
-			<div class='text-center'>
-				<router-link to='/projects'>View more <span class='icon'>&rarr;</span></router-link>
-			</div>
+		<div class='text-center'>
+			<router-link to='/projects'>View more <span class='icon'>&rarr;</span></router-link>
 		</div>
 	</div>
 </template>

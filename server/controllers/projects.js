@@ -8,11 +8,19 @@ const ObjectId = mongoose.Types.ObjectId;
 module.exports.read = async (req, res) => {
 	const projectsQuery = Project.find();
 
+	if (req.query.id) {
+		projectsQuery.where({ _id: req.query.id });
+	}
+
 	if (req.query.author) {
 		projectsQuery.where({ author: ObjectId(req.user._id) });
 	}
 
 	const projects = await projectsQuery.exec();
+
+	if (req.query.id) {
+		res.json(projects[0]);
+	}
 
 	res.json(projects);
 };

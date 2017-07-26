@@ -127,6 +127,10 @@ hr {
 	border-bottom: 2px solid #eaeaea;
 }
 
+img {
+	max-width: 100%;
+}
+
 .text-center hr {
 	margin-left: auto;
 	margin-right: auto;
