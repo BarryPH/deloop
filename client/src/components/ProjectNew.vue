@@ -1,10 +1,12 @@
 <script>
 import AppForm from '@/components/shared/AppForm.vue';
+import PreviewImages from '@/components/ProjectNew/Image.vue';
 
 export default {
 	name: 'project-new-page',
 	components: {
 		AppForm,
+		PreviewImages,
 	},
 	methods: {
 		async handleSubmit(event) {
@@ -35,8 +37,9 @@ export default {
 				</div>
 
 				<div class='form-group'>
-					<h5>Project images</h5>
-					<input type='file' multiple name='projectImages'>
+					<h5>Project images:</h5>
+
+					<PreviewImages name='projectImages' />
 				</div>
 			</AppForm>
 		</div>

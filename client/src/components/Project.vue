@@ -34,7 +34,7 @@ export default {
 			</div>
 		</div>
 
-		<div v-for='image in project.images' class='panel'>
+		<div v-for='image in project.images' class='panel project-images'>
 			<img :src='image.secure_url' />
 		</div>
 	</div>
@@ -53,5 +53,10 @@ export default {
 
 .tags a:not(:last-child) {
 	margin-right: 1rem;
+}
+
+.project-images img {
+	display: block;
+	margin: auto;
 }
 </style>

@@ -28,7 +28,7 @@ export default {
 </script>
 
 <template>
-	<div>
+	<div class='root'>
 		<div v-show='loading' class='loading'><span>&#9881;</span></div>
 
 		<h3>{{title}}</h3>
@@ -44,9 +44,8 @@ export default {
 </template>
 
 <style scoped>
-.panel {
+.root {
 	position: relative;
-	width: 100%;
 }
 
 .loading {
