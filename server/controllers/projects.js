@@ -18,11 +18,10 @@ module.exports.read = async (req, res) => {
 
 	const projects = await projectsQuery.exec();
 
-	if (req.query.id) {
-		res.json(projects[0]);
-	}
 
-	res.json(projects);
+	req.query.id
+		? res.json(projects[0])
+		: res.json(projects);
 };
 
 module.exports.create = async (req, res) => {
@@ -35,6 +34,7 @@ module.exports.create = async (req, res) => {
 	const project = new Project({
 		title: req.body.title,
 		tags,
+		description: req.body.description,
 		author: req.user._id,
 		images: uploadedFiles,
 	});

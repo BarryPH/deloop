@@ -33,7 +33,7 @@ export default {
 	<div class='projects' :class='[clear ? "clear" : null]'>
 		<div v-for='project in projects' class='project'>
 			<router-link :to='`/projects/${project._id}`'>
-				<img :src='project.images[0].url'>
+				<img :src='project.images[0] && project.images[0].url'>
 			</router-link>
 
 			<router-link :to='`/projects/${project._id}`'>

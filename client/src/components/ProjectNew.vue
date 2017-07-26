@@ -31,6 +31,7 @@ export default {
 				<div class='form-group'>
 					<input placeholder='Title' name='title'>
 					<input placeholder='Tags, comma seperated (music, sports)' name='tags'>
+					<textarea placeholder='What is your project about?' rows='4' name='description'></textarea>
 				</div>
 
 				<div class='form-group'>
