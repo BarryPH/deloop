@@ -38,7 +38,9 @@ module.exports.create = async (req, res) => {
 
 	const uploadedFiles = await Promise.all(uploadPromises);
 
-	const tags = req.body.tags.split(',').map(tag => tag.trim());
+	const tags = req.body.tags.split(',')
+		.map(tag => tag.trim())
+		.filter(tag => tag !== '');
 
 	const project = new Project({
 		title: req.body.title,
