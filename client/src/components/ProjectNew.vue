@@ -21,22 +21,24 @@ export default {
 
 <template>
 	<div class='container--md'>
-		<AppForm
-			enctype='multipart/form-data'
-			title='New Project'
-			:submit='handleSubmit'
-			buttonText='Create'
-		>
-			<div class='form-group'>
-				<input placeholder='Title' name='title'>
-				<input placeholder='Tags, comma seperated (music, sports)' name='tags'>
-			</div>
+		<div class='panel'>
+			<AppForm
+				enctype='multipart/form-data'
+				title='New Project'
+				:submit='handleSubmit'
+				buttonText='Create'
+			>
+				<div class='form-group'>
+					<input placeholder='Title' name='title'>
+					<input placeholder='Tags, comma seperated (music, sports)' name='tags'>
+				</div>
 
-			<div class='form-group'>
-				<h5>Project images</h5>
-				<input type='file' multiple name='projectImages'>
-			</div>
-		</AppForm>
+				<div class='form-group'>
+					<h5>Project images</h5>
+					<input type='file' multiple name='projectImages'>
+				</div>
+			</AppForm>
+		</div>
 	</div>
 </template>
 

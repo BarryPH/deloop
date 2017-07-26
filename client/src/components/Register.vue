@@ -19,17 +19,19 @@ export default {
 
 <template>
 	<div class='container--sm text-center'>
-		<AppForm
-			title='Join Deloop'
-			:submit='handleSubmit'
-			buttonText='Register'
-		>
-			<div class='form-group'>
-				<input placeholder='Email' name='email'>
-				<input placeholder='Password' name='password' type='password'>
-				<input placeholder='Repeat Password' name='password2' type='password'>
-			</div>
-		</AppForm>
+		<div class='panel'>
+			<AppForm
+				title='Join Deloop'
+				:submit='handleSubmit'
+				buttonText='Register'
+			>
+				<div class='form-group'>
+					<input placeholder='Email' name='email'>
+					<input placeholder='Password' name='password' type='password'>
+					<input placeholder='Repeat Password' name='password2' type='password'>
+				</div>
+			</AppForm>
+		</div>
 	</div>
 </template>
 

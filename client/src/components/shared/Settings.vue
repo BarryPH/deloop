@@ -37,19 +37,17 @@ export default {
 </script>
 
 <template>
-	<div class='container--md'>
-		<AppForm
-			title='Settings'
-			:submit='handleSubmit'
-			buttonText='Save'
-		>
-			<div class='form-group'>
-				<input placeholder='Full Name' name='name' v-model='user.name'>
-				<input placeholder='Email' name='email' v-model='user.email'>
-				<router-link to='/reset-password' class='password-reset'>Reset password &rarr;</router-link>
-			</div>
-		</AppForm>
-	</div>
+	<AppForm
+		title='Settings'
+		:submit='handleSubmit'
+		buttonText='Save'
+	>
+		<div class='form-group'>
+			<input placeholder='Full Name' name='name' v-model='user.name'>
+			<input placeholder='Email' name='email' v-model='user.email'>
+			<router-link to='/reset-password' class='password-reset'>Reset password &rarr;</router-link>
+		</div>
+	</AppForm>
 </template>
 
 <style scoped>

@@ -19,16 +19,18 @@ export default {
 
 <template>
 	<div class='container--sm text-center'>
-		<AppForm
-			title='Login'
-			:submit='handleSubmit'
-			buttonText='Login'
-		>
-			<div class='form-group'>
-				<input placeholder='Email' name='email'>
-				<input placeholder='Password' name='password' type='password'>
-			</div>
-		</AppForm>
+		<div class='panel'>
+			<AppForm
+				title='Login'
+				:submit='handleSubmit'
+				buttonText='Login'
+			>
+				<div class='form-group'>
+					<input placeholder='Email' name='email'>
+					<input placeholder='Password' name='password' type='password'>
+				</div>
+			</AppForm>
+		</div>
 	</div>
 </template>
 

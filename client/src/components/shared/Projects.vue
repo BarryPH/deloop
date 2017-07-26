@@ -72,8 +72,6 @@ export default {
 }
 
 .projects.clear {
-	justify-content: space-evenly;
-	padding: 1rem;
 	margin-bottom: -1.5rem;
 }
 

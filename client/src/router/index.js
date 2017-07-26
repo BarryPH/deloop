@@ -4,7 +4,6 @@ import Home from '@/components/Home';
 import Register from '@/components/Register';
 import Login from '@/components/Login';
 import Profile from '@/components/Profile';
-import Settings from '@/components/Settings';
 import Projects from '@/components/Projects';
 import ProjectNew from '@/components/ProjectNew';
 
@@ -32,11 +31,6 @@ export default new Router({
 			path: '/profile/:id',
 			name: 'Profile',
 			component: Profile,
-		},
-		{
-			path: '/settings',
-			name: 'Settings',
-			component: Settings,
 		},
 		{
 			path: '/projects',

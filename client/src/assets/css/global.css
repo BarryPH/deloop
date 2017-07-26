@@ -72,6 +72,7 @@ small, .font_small {font-size: 0.75em;}
 a {
 	text-decoration: none;
 	color: inherit;
+	cursor: pointer;
 }
 
 .link {
@@ -105,6 +106,11 @@ span.icon {
 span.icon-left {
 	margin-left: 0rem;
 	margin-right: 0.5rem;
+}
+
+.flip {
+	display: inline-block;
+	transform: rotateY(180deg);
 }
 
 p {
@@ -220,6 +226,10 @@ input:not([type=file]), select, textarea {
 
 .text-center {
 	text-align: center;
+}
+
+.text-right {
+	text-align: right;
 }
 
 .successMessage {

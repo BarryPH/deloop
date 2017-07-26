@@ -1,15 +1,18 @@
 <script>
 import Projects from '@/components/shared/Projects.vue';
+import Settings from '@/components/shared/Settings.vue';
 import auth from '@/auth';
 
 export default {
 	name: 'profile-page',
 	components: {
 		Projects,
+		Settings,
 	},
 	data() {
 		return {
 			auth,
+			section: 'projects',
 		};
 	},
 	computed: {
@@ -25,8 +28,14 @@ export default {
 
 <template>
 	<div class='container'>
-		<div v-if='auth.user.id' class='settings-link'>
-			<router-link to='/settings'>Edit settings &rarr;</router-link>
+		<div v-if='auth.user.id' class='section-links'>
+			<div v-if='section === "projects"' class='links-follow'>
+				<a @click='section = "settings"'>Edit settings <span class='icon'>&#10148;</span></a>
+			</div>
+
+			<div v-if='section === "settings"'>
+				<a @click='section = "projects"'><span class='icon-left flip'>&#10148;</span> Return to profile</a>
+			</div>
 		</div>
 
 		<div v-if='user' class='panels-wrapper'>
@@ -46,22 +55,24 @@ export default {
 			</div>
 
 			<div class='panel content'>
-				<div class='tabs'>
-					<a href='#' class='tab active'>
-						Projects
-					</a>
+				<div v-if='section === "projects"'>
+					<Projects :author='$route.params.id' clear />
 				</div>
 
-				<Projects :author='$route.params.id' clear />
+				<Settings v-else-if='section === "settings"' />
 			</div>
 		</div>
 	</div>
 </template>
 
 <style scoped>
-.settings-link {
+.section-links {
+	margin-left: calc(250px + 1rem);
 	margin-bottom: 1rem;
 	opacity: 0.8;
+}
+
+.links-follow {
 	text-align: right;
 }
 
@@ -73,7 +84,7 @@ export default {
 
 .user-sidebar {
 	padding: 2rem;
-	margin-right: 0.3rem;
+	margin-right: 1rem;
 	width: 250px;
 }
 
@@ -101,22 +112,5 @@ export default {
 .content {
 	flex-grow: 1;
 	flex-basis: 0;
-}
-
-.content.panel {
-	padding: 0;
-}
-
-.tabs {
-	border-bottom: 1px solid #eaeaea;
-}
-
-.tab {
-	display: inline-block;
-	padding: 1rem 1.5rem 1rem;
-}
-
-.tab.active {
-	font-weight: bold;
 }
 </style>
