@@ -34,7 +34,7 @@ export default {
 	<div class='root'>
 		<div v-show='loading' class='loading'><span>&#9881;</span></div>
 
-		<h3>{{title}}</h3>
+		<h3 v-if='title'>{{title}}</h3>
 
 		<form v-on:submit.prevent='handleSubmit' enctype={enctype}>
 			<div v-show='this.status.message' v-bind:class='["formMessage", status.success ? "successMessage" : "errorMessage"]'>{{status.message}}</div>
@@ -79,8 +79,8 @@ export default {
 	animation: spin 3s infinite linear;
 }
 
-form {
-	margin-top: 2rem;
+.title {
+	margin-bottom: 2rem;
 }
 
 .formMessage {

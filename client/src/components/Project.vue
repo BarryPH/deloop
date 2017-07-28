@@ -1,9 +1,17 @@
 <script>
+import auth from '@/auth.js';
+import AppForm from '@/components/shared/AppForm.vue';
+
 export default {
 	name: 'project-page',
 
+	components: {
+		AppForm,
+	},
+
 	data() {
 		return {
+			auth,
 			project: {},
 		};
 	},
@@ -34,8 +42,41 @@ export default {
 			</div>
 		</div>
 
-		<div v-for='image in project.images' class='panel project-images'>
-			<img :src='image.secure_url' />
+		<div v-for='image in project.images'>
+			<div class='panel project-images'>
+				<img :src='image.secure_url' />
+			</div>
+		</div>
+
+		<div class='panel'>
+			<h4>Feedback</h4>
+
+			<div class='comment'>
+				<div class='commenter'>
+					<img src='/static/img/headshot.png' />
+					<div>Dave Hayes</div>
+				</div>
+
+				<div>
+					<p>
+						Lorem iure harum eveniet voluptatum sapiente eaque Tempore porro sit dolores labore id eos! At beatae temporibus omnis laborum dolor, in nulla Nam facere expedita totam culpa rerum Saepe deserunt adipisci rem tempora omnis! Doloremque earum voluptatem pariatur rerum doloremque natus? 
+						<br>
+						<br>
+						Rem blanditiis suscipit error provident saepe? Alias animi error assumenda atque explicabo. Natus ipsum officiis optio veritatis quasi Ad corrupti maxime voluptate
+					</p>
+				</div>
+			</div>
+
+			<AppForm
+				v-if='auth.user.id'
+				class='comment-form'
+				:submit='handleSubmit'
+				buttonText='Comment'
+			>
+				<div class='form-group'>
+					<textarea placeholder='Give some feedback' rows='4' name='comment'></textarea>
+				</div>
+			</AppForm>
 		</div>
 	</div>
 </template>
@@ -58,5 +99,37 @@ export default {
 .project-images img {
 	display: block;
 	margin: auto;
+}
+
+.comment {
+	display: flex;
+	flex-direction: row;
+	align-items: flex-start;
+	padding: 2rem 0;
+}
+
+.comment:not(:last-child) {
+	border-bottom: 1px solid #f5f5f5;
+}
+
+.commenter {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	width: 200px;
+	margin-top: 0.5rem;
+	margin-right: 1rem;
+}
+
+.commenter img {
+	border-radius: 100%;
+	width: 70px;
+	height: 70px;
+	margin-bottom: 0.5rem;
+}
+
+.comment-form {
+	margin-top: 2rem;
 }
 </style>
