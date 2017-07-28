@@ -15,6 +15,7 @@ const auth = rootRequire('./controllers/auth');
 router.route('/projects')
 	.all(middleware.serializeUser)
 	.get(projects.read)
+	.post(middleware.ensureSignedIn)
 	.post(upload.array('projectImages'), projects.create);
 
 router.route('/comments')

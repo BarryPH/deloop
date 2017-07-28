@@ -27,15 +27,15 @@ module.exports.read = async (req, res) => {
 
 	const projects = await projectsQuery.exec();
 
-
 	return req.query.id
 		? res.json(projects[0])
 		: res.json(projects);
 };
 
 module.exports.create = async (req, res) => {
-	const uploadPromises = req.files.map(file => promisify(cloudinary.v2.uploader.upload)(file.path));
+	const files = req.files || [];
 
+	const uploadPromises = files.map(file => promisify(cloudinary.v2.uploader.upload)(file.path));
 	const uploadedFiles = await Promise.all(uploadPromises);
 
 	const tags = req.body.tags.split(',')
