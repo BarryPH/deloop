@@ -50,10 +50,12 @@ async function main() {
 	const port = process.env.PORT || 3000;
 	await app.listen(port);
 
-	if (process.env.NODE_ENV !== 'test') {
-		// eslint-disable-next-line no-console
-		console.log(`Server is running on port: ${port}`);
-	}
+	// eslint-disable-next-line no-console
+	console.log(`Server is running on port: ${port}`);
 }
 
-main();
+if (process.env.NODE_ENV !== 'test') {
+	main();
+}
+
+module.exports = app;

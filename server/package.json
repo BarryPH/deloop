@@ -4,7 +4,7 @@
   "description": "",
   "main": "server.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test": "NODE_ENV=test mocha",
     "start": "node server.js",
     "lint": "eslint ./config ./controllers ./models ./routes server.js --ext .js",
 		"dev": "nodemon server.js"
@@ -29,9 +29,13 @@
     "passport-local": "1.0.0"
   },
   "devDependencies": {
+    "chai": "4.1.0",
     "eslint": "4.3.0",
     "eslint-config-airbnb-base": "11.2.0",
     "eslint-plugin-html": "3.1.1",
-    "eslint-plugin-import": "2.7.0"
+    "eslint-plugin-import": "2.7.0",
+    "mocha": "3.4.2",
+    "superagent": "3.5.2",
+    "supertest": "3.0.0"
   }
 }
