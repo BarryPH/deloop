@@ -18,6 +18,14 @@ router.route('/projects')
 	.post(middleware.ensureSignedIn)
 	.post(upload.array('projectImages'), projects.create);
 
+router.route('/projects/:id')
+	.put(middleware.serializeUser)
+	.put(middleware.ensureProjectOwner)
+	.put(projects.update)
+	.delete(middleware.serializeUser)
+	.delete(middleware.ensureProjectOwner)
+	.delete(projects.delete)
+
 router.route('/comments')
 	.get(comments.read)
 	.post(middleware.serializeUser)

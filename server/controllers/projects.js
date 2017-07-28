@@ -58,3 +58,33 @@ module.exports.create = async (req, res) => {
 
 	res.json(response);
 };
+
+module.exports.update = async (req, res) => {
+	const project = await Project.findOneAndUpdate(
+		{ _id: req.params.id },
+		req.body,
+		{ new: true },
+	);
+
+	res.json({
+		project,
+		info: {
+			success: true,
+			message: 'Project updated',
+		},
+	});
+};
+
+module.exports.delete = async (req, res) => {
+	const project = await Project.findOneAndRemove({
+		_id: req.params.id,
+	})
+		.exec();
+
+	res.json({
+		info: {
+			success: true,
+			message: 'Project deleted',
+		},
+	});
+};

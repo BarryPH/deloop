@@ -96,7 +96,7 @@ describe('Projects', () => {
 			.set('authorization', `Bearer ${token}`)
 			.send(projectUpdate);
 
-		const { project, info } = req.body;
+		const { project, info } = res.body;
 
 		res.status.should.equal(200);
 		res.body.should.be.a('object');
