@@ -21,7 +21,16 @@ router.route('/projects')
 router.route('/comments')
 	.get(comments.read)
 	.post(middleware.serializeUser)
+	.post(middleware.ensureSignedIn)
 	.post(comments.create);
+
+router.route('/comments/:id')
+	.put(middleware.serializeUser)
+	.put(middleware.ensureCommentOwner)
+	.put(comments.update)
+	.delete(middleware.serializeUser)
+	.delete(middleware.ensureCommentOwner)
+	.delete(comments.delete);
 
 router.route('/register')
 	.post(auth.register);

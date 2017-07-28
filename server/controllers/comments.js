@@ -2,11 +2,20 @@ const mongoose = require('mongoose');
 
 const Comment = mongoose.model('Comment');
 
+/**
+ * Create an new comment
+ * @param {Object} req
+ * @param {string} req.project
+ * @param {string} req.comment
+ * @returns {object}
+ */
 module.exports.create = async (req, res) => {
+	const { project, content } = req.body;
+
 	const comment = new Comment({
 		author: req.user._id,
-		project: req.body.project,
-		content: req.body.comment.trim(),
+		project,
+		content,
 	});
 
 	comment.save();
@@ -23,17 +32,42 @@ module.exports.create = async (req, res) => {
 };
 
 module.exports.read = async (req, res) => {
+	const { project } = req.query;
+
 	const comments = await Comment.find({
-		project: req.query.project,
-	})
-	.populate('author')
-	.exec();
+			project,
+		})
+		.exec();
 
 	res.json(comments);
 };
 
 module.exports.update = async (req, res) => {
+	const comment = await Comment.findOneAndUpdate(
+		{ _id: req.params.id },
+		req.body,
+		{ new: true },
+	);
+
+	res.json({
+		comment,
+		info: {
+			success: true,
+			message: 'Comment updated',
+		},
+	});
 };
 
 module.exports.delete = async (req, res) => {
+	const response = await Comment.findOneAndRemove({
+		_id: req.params.id,
+	})
+		.exec();
+
+	res.json({
+		info: {
+			success: true,
+			message: 'Comment deleted',
+		},
+	});
 };

@@ -1,17 +1,21 @@
 const mongoose = require('mongoose');
 
-const Types = mongoose.Schema.Types;
+const Schema = mongoose.Schema;
 
-const CommentSchema = new mongoose.Schema({
-	author: {
-		type: Types.ObjectId,
-		ref: 'User',
-	},
+const CommentSchema = new Schema({
 	content: String,
 	project: {
-		type: Types.ObjectId,
+		type: Schema.Types.ObjectId,
 		ref: 'Project',
-	}
+	},
+	author: {
+		type: Schema.Types.ObjectId,
+		ref: 'User',
+	},
+	createdAt: {
+		type: Date,
+		default: Date.now,
+	},
 });
 
 mongoose.model('Comment', CommentSchema);

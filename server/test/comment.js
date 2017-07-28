@@ -71,13 +71,13 @@ describe('Comments', () => {
 				project: mockComment.project,
 			});
 
-		const { comments } = res.body;
+		const comments = res.body;
 
 		res.status.should.equal(200);
-		res.body.should.be.a('object');
+		res.body.should.be.a('array');
 
 		comments.should.be.a('array');
-		comments.should.have.lengthOf(1);
+		comments.should.have.length.of.at.least(1);
 		comments[0]._id.should.be.a('string');
 		comments[0].project.should.be.a('string');
 		comments[0].author.should.be.a('string');
@@ -93,9 +93,9 @@ describe('Comments', () => {
 			.set('authorization', `Bearer ${token}`)
 			.send(commentUpdate);
 
-		const { comment, info } = req.body;
+		const { comment, info } = res.body;
 
-		res.status.should.equal(2000);
+		res.status.should.equal(200);
 		res.body.should.be.a('object');
 
 		comment._id.should.be.a('string');

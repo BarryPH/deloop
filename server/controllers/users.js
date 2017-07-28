@@ -8,8 +8,8 @@ const User = mongoose.model('User');
 
 /**
  * Filter an object by list of whitelisted keys
- * @param dirtyObject {array} Object to be filtered
- * @param keyWhiteList {array} Keys to retun
+ * @param {object} dirtyObject - Object to be filtered
+ * @param {array} keyWhiteList - Keys to retun
  * @returns {array}
  */
 function filterObject(dirtyObject, keyWhiteList) {
