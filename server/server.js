@@ -25,7 +25,11 @@ if (process.env.NODE_ENV !== 'prodution' && process.env.NODE_ENV !== 'test') {
 // Use native promises as mongoose promise library
 mongoose.Promise = global.Promise;
 
-mongoose.connect(config.mongoUri || `mongodb://localhost/${pkg.name}`, {
+const mongodbUri = process.env.NODE_ENV === 'test' && 'mongodb://localhost/deloop-test'
+	|| config.mongoUri
+	|| `mongodb://localhost/${pkg.name}`;
+
+mongoose.connect(mongodbUri, {
 	useMongoClient: true,
 });
 require('./models');

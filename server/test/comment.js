@@ -1,10 +1,12 @@
 const chai = require('chai');
 const supertest = require('supertest');
 const serverInstance = require('../server.js');
+const utils = require('./utils.js');
 
 const should = chai.should();
 const server = supertest.agent(serverInstance);
 let token;
+let userId;
 let commentId;
 
 const mockComment = {
@@ -18,17 +20,20 @@ const commentUpdate = {
 
 describe('Comments', () => {
 	before(async () => {
-		const res = await server
-			.post('/login')
-			.send({
-				email: 'test@mail.com',
-				password: 'asdfasdf',
-			});
+		const res = await utils.createUser();
 
 		res.status.should.equal(200);
 		res.body.should.have.property('token');
 
 		token = res.body.token;
+		userId = res.body.id;
+	});
+
+	after(async() => {
+		const res = await utils.deleteUser(userId, token);
+
+		res.status.should.equal(200);
+		res.body.should.be.a('object');
 	});
 
 	it('should create a comment', async () => {

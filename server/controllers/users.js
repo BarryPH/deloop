@@ -49,3 +49,17 @@ module.exports.update = async (req, res) => {
 		},
 	});
 };
+
+module.exports.delete = async (req, res) => {
+	const user = await User.findOneAndRemove({
+		_id: req.params.id,
+	})
+		.exec();
+
+	res.json({
+		info: {
+			success: true,
+			message: 'Account deleted',
+		}
+	});
+};

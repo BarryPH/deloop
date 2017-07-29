@@ -53,6 +53,8 @@ router.route('/users/:id')
 	.all(middleware.serializeUser)
 	.get(users.read)
 	.put(middleware.ensureUserOfId)
-	.put(users.update);
+	.put(users.update)
+	.delete(middleware.ensureUserOfId)
+	.delete(users.delete);
 
 module.exports = router;
