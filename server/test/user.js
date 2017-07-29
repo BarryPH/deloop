@@ -6,7 +6,7 @@ const utils = require('./utils.js');
 const should = chai.should();
 const server = supertest.agent(serverInstance);
 let userId;
-let token;
+let authToken;
 
 const mockUser = utils.mockUser;
 const userUpdate = {
@@ -16,19 +16,19 @@ const userUpdate = {
 describe('Users', () => {
 	it('should create a user', async () => {
 		const res = await utils.createUser();
-		const { user, info } = res.body;
+		const { token, user, info } = res.body;
 
 		res.status.should.equal(200);
-		res.body.should.have.property('token');
+		token.should.be.a('string');
 
 		user._id.should.be.a('string');
 		user.email.should.equal(mockUser.email);
 		should.equal(user.password, undefined);
-		info.success.should.be.a('boolean');
+
 		info.success.should.equal(true);
 		info.message.should.be.a('string');
 
-		token = res.body.token;
+		authToken = token;
 		userId = user._id;
 	});
 
@@ -37,14 +37,13 @@ describe('Users', () => {
 			.post('/login')
 			.query(mockUser);
 
-		const { id, info } = res.body;
+		const { token, id, info } = res.body;
 
 		res.status.should.equal(200);
-		res.body.should.be.a('object');
-		res.body.should.have.property('token');
+		token.should.be.a('string');
 
 		id.should.be.a('string');
-		info.success.should.be.a('boolean');
+
 		info.success.should.equal(true);
 		info.message.should.be.a('string');
 	});
@@ -62,9 +61,7 @@ describe('Users', () => {
 		const { info } = res.body;
 
 		res.status.should.equal(200);
-		res.body.should.be.a('object');
 
-		info.success.should.be.a('boolean');
 		info.success.should.equal(false);
 		info.message.should.be.a('string');
 	});
@@ -72,18 +69,16 @@ describe('Users', () => {
 	it('should update users settings', async() => {
 		const res = await server
 			.put(`/users/${userId}`)
-			.set('authorization', `Bearer ${token}`)
+			.set('authorization', `Bearer ${authToken}`)
 			.send(userUpdate);
 
 		const { user, info } = res.body;
 
 		res.status.should.equal(200);
-		res.body.should.be.a('object');
 
-		user.email.should.be.a('string');
 		user.email.should.equal(userUpdate.email);
 		should.equal(user.password, undefined);
-		info.success.should.be.a('boolean');
+
 		info.success.should.equal(true);
 		info.message.should.be.a('string');
 	});
@@ -102,13 +97,12 @@ describe('Users', () => {
 	*/
 
 	it('should delete a user', async () => {
-		const res = await utils.deleteUser(userId, token);
+		const res = await utils.deleteUser(userId, authToken);
 		const { info } = res.body;
 
 		res.status.should.equal(200);
 		res.body.should.be.a('object');
 
-		info.success.should.be.a('boolean');
 		info.success.should.equal(true);
 		info.message.should.be.a('string');
 	});

@@ -5,7 +5,7 @@ const utils = require('./utils.js');
 
 const should = chai.should();
 const server = supertest.agent(serverInstance);
-let token;
+let authToken;
 let userId;
 let commentId;
 
@@ -22,35 +22,34 @@ describe('Comments', () => {
 	before(async () => {
 		const res = await utils.createUser();
 
-		token = res.body.token;
-		userId = res.body.user._id;
+		const { token, user } = res.body;
+
+		authToken = token;
+		userId = user._id;
 	});
 
 	after(async() => {
-		const res = await utils.deleteUser(userId, token);
+		const res = await utils.deleteUser(userId, authToken);
 
 		res.status.should.equal(200);
-		res.body.should.be.a('object');
 	});
 
 	it('should create a comment', async () => {
 		const res = await server
 			.post('/comments')
-			.set('authorization', `Bearer ${token}`)
+			.set('authorization', `Bearer ${authToken}`)
 			.send(mockComment);
 
 		const { comment, info } = res.body;
 
 		res.status.should.equal(200);
-		res.body.should.be.a('object');
 
 		comment._id.should.be.a('string');
 		comment.project.should.be.a('string');
 		comment.author.should.be.a('object');
-		comment.content.should.be.a('string');
 		comment.content.should.equal(mockComment.content);
 		comment.createdAt.should.be.a('string');
-		info.success.should.be.a('boolean');
+
 		info.success.should.equal(true);
 		info.message.should.be.a('string');
 
@@ -83,7 +82,6 @@ describe('Comments', () => {
 		comments[0].project.should.be.a('string');
 		comments[0].author.should.be.a('object');
 		comments[0].project.should.be.a('string');
-		comments[0].content.should.be.a('string');
 		comments[0].content.should.equal(mockComment.content);
 		comments[0].createdAt.should.be.a('string');
 	});
@@ -91,22 +89,20 @@ describe('Comments', () => {
 	it('should update comment content', async() => {
 		const res = await server
 			.put(`/comments/${commentId}`)
-			.set('authorization', `Bearer ${token}`)
+			.set('authorization', `Bearer ${authToken}`)
 			.send(commentUpdate);
 
 		const { comment, info } = res.body;
 
 		res.status.should.equal(200);
-		res.body.should.be.a('object');
 
 		comment._id.should.be.a('string');
 		comment.project.should.be.a('string');
 		comment.author.should.be.a('string');
 		comment.project.should.be.a('string');
-		comment.content.should.be.a('string');
 		comment.content.should.equal(commentUpdate.content);
 		comment.createdAt.should.be.a('string');
-		info.success.should.be.a('boolean');
+
 		info.success.should.equal(true);
 		info.message.should.be.a('string');
 	});
@@ -127,14 +123,12 @@ describe('Comments', () => {
 	it('should delete a comment', async () => {
 		const res = await server
 			.delete(`/comments/${commentId}`)
-			.set('authorization', `Bearer ${token}`);
+			.set('authorization', `Bearer ${authToken}`);
 
 		const { info } = res.body;
 
 		res.status.should.equal(200);
-		res.body.should.be.a('object');
 
-		info.success.should.be.a('boolean');
 		info.success.should.equal(true);
 		info.message.should.be.a('string');
 	});

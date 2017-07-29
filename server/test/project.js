@@ -5,7 +5,7 @@ const utils = require('./utils.js');
 
 const should = chai.should();
 const server = supertest.agent(serverInstance);
-let token;
+let authToken;
 let userId;
 let projectId;
 
@@ -25,37 +25,34 @@ describe('Projects', () => {
 	before(async () => {
 		const res = await utils.createUser();
 
-		token = res.body.token;
-		userId = res.body.user._id;
+		const { token, user } = res.body;
+
+		authToken = token;
+		userId = user._id;
 	});
 
 	after(async() => {
-		const res = await utils.deleteUser(userId, token);
+		const res = await utils.deleteUser(userId, authToken);
 
 		res.status.should.equal(200);
-		res.body.should.be.a('object');
 	});
 
 	it('should create a project', async () => {
 		const res = await server
 			.post('/projects')
-			.set('authorization', `Bearer ${token}`)
+			.set('authorization', `Bearer ${authToken}`)
 			.send(mockProject);
 
 		const { project, info } = res.body;
 
 		res.status.should.equal(200);
-		res.body.should.be.a('object');
 
-		project.title.should.be.a('string');
 		project.title.should.equal(mockProject.title);
-		project.tags.should.be.a('array');
 		project.tags.should.have.same.members(['Sit', 'quod', 'dolorum']);
-		project.description.should.be.a('string');
 		project.description.should.equal(mockProject.description);
 		project.author.should.be.a('string');
 		project.images.should.be.a('array');
-		info.success.should.be.a('boolean');
+
 		info.success.should.equal(true);
 		info.message.should.be.a('string');
 
@@ -80,13 +77,9 @@ describe('Projects', () => {
 		const project = res.body;
 
 		res.status.should.equal(200);
-		res.body.should.be.a('object');
 
-		project.title.should.be.a('string');
 		project.title.should.equal(mockProject.title);
-		project.tags.should.be.a('array');
 		project.tags.should.have.same.members(['Sit', 'quod', 'dolorum']);
-		project.description.should.be.a('string');
 		project.description.should.equal(mockProject.description);
 		project.author.should.be.a('string');
 		project.images.should.be.a('array');
@@ -95,23 +88,19 @@ describe('Projects', () => {
 	it('should update project content', async() => {
 		const res = await server
 			.put(`/projects/${projectId}`)
-			.set('authorization', `Bearer ${token}`)
+			.set('authorization', `Bearer ${authToken}`)
 			.send(projectUpdate);
 
 		const { project, info } = res.body;
 
 		res.status.should.equal(200);
-		res.body.should.be.a('object');
 
-		project.title.should.be.a('string');
 		project.title.should.equal(projectUpdate.title);
-		project.tags.should.be.a('array');
 		project.tags.should.have.same.members(['Sit', 'quod', 'dolorum']);
-		project.description.should.be.a('string');
 		project.description.should.equal(projectUpdate.description);
 		project.author.should.be.a('string');
 		project.images.should.be.a('array');
-		info.success.should.be.a('boolean');
+
 		info.success.should.equal(true);
 		info.message.should.be.a('string');
 	});
@@ -132,14 +121,12 @@ describe('Projects', () => {
 	it('should delete a project', async () => {
 		const res = await server
 			.delete(`/projects/${projectId}`)
-			.set('authorization', `Bearer ${token}`);
+			.set('authorization', `Bearer ${authToken}`);
 
 		const { info } = res.body;
 
 		res.status.should.equal(200);
-		res.body.should.be.a('object');
 
-		info.success.should.be.a('boolean');
 		info.success.should.equal(true);
 		info.message.should.be.a('string');
 	});
