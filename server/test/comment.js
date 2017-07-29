@@ -44,8 +44,7 @@ describe('Comments', () => {
 
 		comment._id.should.be.a('string');
 		comment.project.should.be.a('string');
-		comment.author.should.be.a('string');
-		comment.project.should.be.a('string');
+		comment.author.should.be.a('object');
 		comment.content.should.be.a('string');
 		comment.content.should.equal(mockComment.content);
 		comment.createdAt.should.be.a('string');
@@ -80,7 +79,7 @@ describe('Comments', () => {
 		comments.should.have.length.of.at.least(1);
 		comments[0]._id.should.be.a('string');
 		comments[0].project.should.be.a('string');
-		comments[0].author.should.be.a('string');
+		comments[0].author.should.be.a('object');
 		comments[0].project.should.be.a('string');
 		comments[0].content.should.be.a('string');
 		comments[0].content.should.equal(mockComment.content);

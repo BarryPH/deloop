@@ -15,6 +15,7 @@ export default {
 			auth,
 			project: {},
 			comments: [],
+			comment: '',
 		};
 	},
 
@@ -38,18 +39,23 @@ export default {
 				project: this.$route.params.id,
 			};
 			const { data: comments } = await this.$http.get('/comments', { params });
-
 			this.comments = comments;
 		},
 
 		async handleSubmit(event) {
+			const JSONFormData = {
+				project: this.$route.params.id,
+				content: this.comment,
+			};
 			const JSONFormData = utils.formToJSON(event.target);
 			JSONFormData.project = this.$route.params.id;
 
-			const { data: { info } } = await this.$http.post('/comments', JSONFormData);
+			const { data: { comment, info } } = await this.$http.post('/comments', JSONFormData);
+			this.comments.push(comment);
+			event.target.reset();
 
 			return info;
-		},
+		}
 	},
 };
 </script>
@@ -76,11 +82,11 @@ export default {
 			<div v-for='comment in comments' class='comment'>
 				<div class='commenter'>
 					<img src='/static/img/headshot.png' />
-					<a href='#' class='commenter-name'>{{comment.author.email}}</a>
+					<div class='commenter-name'>{{comment.author.email}}</div>
 				</div>
 
-				<div class='comment-description'>
-					<p>{{comment.content}}</p>
+				<div>
+					<div class='comment-content'>{{comment.content}}</div>
 				</div>
 			</div>
 
@@ -91,7 +97,7 @@ export default {
 				buttonText='Comment'
 			>
 				<div class='form-group'>
-					<textarea placeholder='Give some feedback' rows='4' name='comment'></textarea>
+					<textarea placeholder='Give some feedback' rows='4' name='content' v-model='comment'></textarea>
 				</div>
 			</AppForm>
 		</div>
@@ -135,6 +141,7 @@ export default {
 	justify-content: center;
 	align-items: center;
 	width: 200px;
+	min-width: 200px;
 	margin-top: 0.5rem;
 	margin-right: 1rem;
 }
@@ -150,8 +157,8 @@ export default {
 	color: var(--color-primary-blue);
 }
 
-.comment-description {
-	white-space: pre;
+.comment-content {
+	white-space: pre-line;
 }
 
 .comment-form {

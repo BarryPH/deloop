@@ -15,13 +15,17 @@ module.exports.create = async (req, res) => {
 	const comment = new Comment({
 		author: req.user._id,
 		project,
-		content,
+		content: content.trim(),
 	});
 
 	comment.save();
 
+	// Populate author on comment without making a new query
+	let commentJSON = comment.toObject();
+	commentJSON.author = req.user;
+
 	const response = {
-		comment,
+		comment: commentJSON,
 		info: {
 			success: true,
 			message: 'Thank you for your comment',
@@ -37,6 +41,7 @@ module.exports.read = async (req, res) => {
 	const comments = await Comment.find({
 			project,
 		})
+		.populate('author')
 		.exec();
 
 	res.json(comments);
