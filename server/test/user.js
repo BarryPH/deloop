@@ -16,18 +16,20 @@ const userUpdate = {
 describe('Users', () => {
 	it('should create a user', async () => {
 		const res = await utils.createUser();
-		const { id, info } = res.body;
+		const { user, info } = res.body;
 
 		res.status.should.equal(200);
 		res.body.should.have.property('token');
-		res.body.should.have.property('id');
 
+		user._id.should.be.a('string');
+		user.email.should.equal(mockUser.email);
+		should.equal(user.password, undefined);
 		info.success.should.be.a('boolean');
 		info.success.should.equal(true);
 		info.message.should.be.a('string');
 
 		token = res.body.token;
-		userId = res.body.id;
+		userId = user._id;
 	});
 
 	it('should login user', async () => {

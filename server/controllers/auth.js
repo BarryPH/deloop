@@ -3,6 +3,7 @@ const jwt = require('jsonwebtoken');
 
 const rootRequire = require.main.require;
 const config = rootRequire('./config/config');
+const utils = rootRequire('./controllers/utils.js');
 
 function promisifiedRegister(req, res, next) {
 	return new Promise((resolve, reject) => {
@@ -49,12 +50,15 @@ module.exports.register = async (req, res, next) => {
 
 	const userJSON = user.toObject();
 	const token = jwt.sign(userJSON, config.superSecret);
-	const response = Object.assign({}, userJSON, {
+
+	const cleanUser = utils.cleanUser(userJSON);
+
+	const response =
+	res.json({
 		token,
 		id: userJSON._id,
+		user: cleanUser,
 	});
-
-	return res.json(response);
 };
 
 module.exports.login = async (req, res, next) => {

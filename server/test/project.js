@@ -25,11 +25,8 @@ describe('Projects', () => {
 	before(async () => {
 		const res = await utils.createUser();
 
-		res.status.should.equal(200);
-		res.body.should.have.property('token');
-
 		token = res.body.token;
-		userId = res.body.id;
+		userId = res.body.user._id;
 	});
 
 	after(async() => {
