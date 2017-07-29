@@ -52,7 +52,7 @@ export default {
 
 			const { data: { comment, info } } = await this.$http.post('/comments', JSONFormData);
 			this.comments.push(comment);
-			event.target.reset();
+			this.comment = '';
 
 			return info;
 		}
