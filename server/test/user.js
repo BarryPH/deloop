@@ -80,6 +80,7 @@ describe('Users', () => {
 
 		user.email.should.be.a('string');
 		user.email.should.equal(userUpdate.email);
+		should.equal(user.password, undefined);
 		info.success.should.be.a('boolean');
 		info.success.should.equal(true);
 		info.message.should.be.a('string');

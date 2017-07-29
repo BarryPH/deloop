@@ -31,18 +31,21 @@ module.exports.read = async (req, res) => {
 };
 
 module.exports.update = async (req, res) => {
+	const keyWhiteList = ['name', 'email', 'website'];
+	const cleanUpdates = filterObject(req.body, keyWhiteList);
+
 	const user = await User.findOneAndUpdate(
 		{ _id: req.user._id },
-		req.body,
+		cleanUpdates,
 		{ new: true },
 	);
 
-	const userJSON = user.toObject();
-	const token = jwt.sign(userJSON, config.superSecret);
+	const cleanUser = filterObject(user.toObject(), keyWhiteList);
+	const token = jwt.sign(user.toObject(), config.superSecret);
 
 	res.json({
 		token,
-		user: userJSON,
+		user: cleanUser,
 		info: {
 			success: true,
 			message: 'Your settings have been updated',
