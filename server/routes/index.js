@@ -52,7 +52,7 @@ router.route('/logout')
 router.route('/users/:id')
 	.all(middleware.serializeUser)
 	.get(users.read)
-	.post(middleware.ensureUserOfId)
-	.post(users.update);
+	.put(middleware.ensureUserOfId)
+	.put(users.update);
 
 module.exports = router;

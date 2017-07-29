@@ -28,7 +28,7 @@ export default {
 
 		async handleSubmit(event) {
 			const JSONFormData = utils.formToJSON(event.target);
-			const response = await this.$http.post(`/users/${auth.user.id}`, JSONFormData);
+			const response = await this.$http.put(`/users/${auth.user.id}`, JSONFormData);
 
 			if (response.status !== 200) {
 				return response;
