@@ -207,8 +207,8 @@ input:not([type=file]), select, textarea {
 }
 
 @media (max-width: 600px) {
-	.container--sm {
-		padding: var(--container-padding-sm);
+	.container, .container--lg, .container--md, .container--sm {
+		padding: var(--container-padding-xsm);
 	}
 }
 

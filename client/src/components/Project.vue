@@ -38,7 +38,7 @@ export default {
 			<h2>{{project.title}}</h2>
 			<p>{{project.description}}</p>
 			<div class='tags'>
-				<a v-for='tag in project.tags' :href='"/projects?tag=${tag}"'>{{tag}}</a>
+				<a v-for='tag in project.tags' :href='`/projects?tag=${tag}`'>{{tag}}</a>
 			</div>
 		</div>
 
@@ -54,12 +54,28 @@ export default {
 			<div class='comment'>
 				<div class='commenter'>
 					<img src='/static/img/headshot.png' />
-					<div>Dave Hayes</div>
+					<a href='#' class='commenter-name'>Dave Hayes</a>
 				</div>
 
 				<div>
 					<p>
-						Lorem iure harum eveniet voluptatum sapiente eaque Tempore porro sit dolores labore id eos! At beatae temporibus omnis laborum dolor, in nulla Nam facere expedita totam culpa rerum Saepe deserunt adipisci rem tempora omnis! Doloremque earum voluptatem pariatur rerum doloremque natus? 
+						Lorem iure harum eveniet voluptatum sapiente eaque Tempore porro sit dolores labore id eos! At beatae temporibus omnis laborum dolor, in nulla Nam facere expedita totam culpa rerum Saepe deserunt adipisci rem tempora omnis! Doloremque earum voluptatem pariatur rerum doloremque natus?
+						<br>
+						<br>
+						Rem blanditiis suscipit error provident saepe? Alias animi error assumenda atque explicabo. Natus ipsum officiis optio veritatis quasi Ad corrupti maxime voluptate
+					</p>
+				</div>
+			</div>
+
+			<div class='comment'>
+				<div class='commenter'>
+					<img src='/static/img/headshot.png' />
+					<a href='#' class='commenter-name'>Dave Hayes</a>
+				</div>
+
+				<div>
+					<p>
+						Lorem iure harum eveniet voluptatum sapiente eaque Tempore porro sit dolores labore id eos! At beatae temporibus omnis laborum dolor, in nulla Nam facere expedita totam culpa rerum Saepe deserunt adipisci rem tempora omnis! Doloremque earum voluptatem pariatur rerum doloremque natus?
 						<br>
 						<br>
 						Rem blanditiis suscipit error provident saepe? Alias animi error assumenda atque explicabo. Natus ipsum officiis optio veritatis quasi Ad corrupti maxime voluptate
@@ -126,10 +142,25 @@ export default {
 	border-radius: 100%;
 	width: 70px;
 	height: 70px;
-	margin-bottom: 0.5rem;
+	margin-bottom: 1rem;
+}
+
+.commenter-name {
+	color: var(--color-primary-blue);
 }
 
 .comment-form {
 	margin-top: 2rem;
+}
+
+@media (max-width: 750px) {
+	.comment {
+		flex-direction: column;
+	}
+
+	.commenter {
+		width: 100%;
+		margin: 0 0 1rem;
+	}
 }
 </style>

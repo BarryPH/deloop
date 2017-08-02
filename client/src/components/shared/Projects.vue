@@ -93,4 +93,14 @@ img {
 	margin-bottom: 1rem;
 	width: 100%;
 }
+
+@media (max-width: 400px) {
+	.projects {
+		width: 100%;
+	}
+
+	.project {
+		margin-right: 0;
+	}
+}
 </style>

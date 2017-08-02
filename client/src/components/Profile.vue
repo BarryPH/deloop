@@ -117,4 +117,16 @@ export default {
 	flex-grow: 1;
 	flex-basis: 0;
 }
+
+@media (max-width: 750px) {
+	.section-links {
+		margin-left: 0;
+	}
+
+	.user-sidebar {
+		text-align: center;
+		width: 100%;
+		margin: 0 0 1rem;
+	}
+}
 </style>
