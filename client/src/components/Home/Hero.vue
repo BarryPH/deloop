@@ -6,7 +6,7 @@ export default {
 
 <template>
 	<div class='container hero'>
-		<h2 class='hero-headline'>A place for designers <br> to give and recieve feedback</h2>
+		<h1 class='hero-headline'>Deloop</h1>
 
 		<nav>
 			<router-link class='fill color-primary' to='/projects'>View Projects</router-link>
@@ -26,16 +26,24 @@ export default {
 }
 
 .hero-headline {
-	text-transform: capitalize;
-	margin-bottom: 3rem;
+	text-transform: uppercase;
+	letter-spacing: 0.9rem;
+	margin-bottom: 2rem;
+}
+
+.hero-subheadline {
+	margin-bottom: 3.5rem;
+	font-weight: 200;
+	font-family: var(--font);
 }
 
 nav {
 	font-size: 1.2rem;
 }
 
-nav a:not(:last-child) {
-	margin-right: 1.5rem;
+nav a {
+	display: inline-block;
+	width: 200px;
 }
 
 @media (max-width: 500px) {

@@ -8,7 +8,7 @@
 	--color-primary-red: #db1f1f99;
 
 	--font: 'Lato';
-	--font-header: 'Lato';
+	--font-header: 'Montserrat';
 	--font-color: #333;
 	--line-height: 1.45;
 
@@ -83,6 +83,7 @@ a {
 	background-color: var(--font-color);
 	color: #fff;
 	padding: 0.7rem 1.5rem;
+	box-shadow: 0 1px 3px #333;
 }
 
 .fill-go {
