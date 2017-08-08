@@ -1,13 +1,13 @@
 const mongoose = require('mongoose');
 
-const Schema = mongoose.Schema;
+const Types = mongoose.Schema.Types;
 
 const ProjectSchema = new mongoose.Schema({
 	title: String,
 	tags: Array,
 	description: String,
 	author: {
-		type: Schema.Types.ObjectId,
+		type: Types.ObjectId,
 		ref: 'User',
 	},
 	images: Array,

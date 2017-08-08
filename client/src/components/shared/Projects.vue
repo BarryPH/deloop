@@ -44,7 +44,7 @@ export default {
 				<header class='title'>Add new project</header>
 			</router-link>
 		</div>
-
+:
 		<div v-for='project in projects' class='project'>
 			<router-link :to='`/projects/${project._id}`'>
 				<img :src='project.images[0] && project.images[0].url'>

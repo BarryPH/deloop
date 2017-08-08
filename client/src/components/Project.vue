@@ -1,5 +1,6 @@
 <script>
 import auth from '@/auth.js';
+import utils from '@/utils.js';
 import AppForm from '@/components/shared/AppForm.vue';
 
 export default {
@@ -13,11 +14,13 @@ export default {
 		return {
 			auth,
 			project: {},
+			comments: [],
 		};
 	},
 
 	created() {
 		this.fetchProject();
+		this.fetchComments();
 	},
 
 	methods: {
@@ -26,7 +29,26 @@ export default {
 				id: this.$route.params.id,
 			};
 			const { data: project } = await this.$http.get('/projects', { params });
+
 			this.project = project;
+		},
+
+		async fetchComments() {
+			const params = {
+				project: this.$route.params.id,
+			};
+			const { data: comments } = await this.$http.get('/comments', { params });
+
+			this.comments = comments;
+		},
+
+		async handleSubmit(event) {
+			const JSONFormData = utils.formToJSON(event.target);
+			JSONFormData.project = this.$route.params.id;
+
+			const { data: { info } } = await this.$http.post('/comments', JSONFormData);
+
+			return info;
 		},
 	},
 };
@@ -51,35 +73,14 @@ export default {
 		<div class='panel'>
 			<h4>Feedback</h4>
 
-			<div class='comment'>
+			<div v-for='comment in comments' class='comment'>
 				<div class='commenter'>
 					<img src='/static/img/headshot.png' />
-					<a href='#' class='commenter-name'>Dave Hayes</a>
+					<a href='#' class='commenter-name'>{{comment.author.email}}</a>
 				</div>
 
-				<div>
-					<p>
-						Lorem iure harum eveniet voluptatum sapiente eaque Tempore porro sit dolores labore id eos! At beatae temporibus omnis laborum dolor, in nulla Nam facere expedita totam culpa rerum Saepe deserunt adipisci rem tempora omnis! Doloremque earum voluptatem pariatur rerum doloremque natus?
-						<br>
-						<br>
-						Rem blanditiis suscipit error provident saepe? Alias animi error assumenda atque explicabo. Natus ipsum officiis optio veritatis quasi Ad corrupti maxime voluptate
-					</p>
-				</div>
-			</div>
-
-			<div class='comment'>
-				<div class='commenter'>
-					<img src='/static/img/headshot.png' />
-					<a href='#' class='commenter-name'>Dave Hayes</a>
-				</div>
-
-				<div>
-					<p>
-						Lorem iure harum eveniet voluptatum sapiente eaque Tempore porro sit dolores labore id eos! At beatae temporibus omnis laborum dolor, in nulla Nam facere expedita totam culpa rerum Saepe deserunt adipisci rem tempora omnis! Doloremque earum voluptatem pariatur rerum doloremque natus?
-						<br>
-						<br>
-						Rem blanditiis suscipit error provident saepe? Alias animi error assumenda atque explicabo. Natus ipsum officiis optio veritatis quasi Ad corrupti maxime voluptate
-					</p>
+				<div class='comment-description'>
+					<p>{{comment.content}}</p>
 				</div>
 			</div>
 
@@ -147,6 +148,10 @@ export default {
 
 .commenter-name {
 	color: var(--color-primary-blue);
+}
+
+.comment-description {
+	white-space: pre;
 }
 
 .comment-form {
