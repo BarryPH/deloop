@@ -3,16 +3,17 @@ export default {
 	name: 'App-Form',
 
 	props: {
-		submit: Function,
-		buttonText: String,
 		title: String,
+		buttonText: String,
 		enctype: String,
+		submit: Function,
 	},
 
 	data() {
 		return {
 			loading: false,
-			status: {},
+			success: false,
+			message: '',
 		};
 	},
 
@@ -20,11 +21,11 @@ export default {
 		async handleSubmit(event) {
 			this.loading = true;
 
-			const { success, message } = await this.submit(event);
+			const response = await this.submit(event);
 
 			this.loading = false;
-			this.status.success = success;
-			this.status.message = message;
+			this.success = response.status === 200;
+			this.message = response.data.message;
 		},
 	},
 };
@@ -37,7 +38,7 @@ export default {
 		<h3 v-if='title'>{{title}}</h3>
 
 		<form v-on:submit.prevent='handleSubmit' enctype={enctype}>
-			<div v-show='this.status.message' v-bind:class='["formMessage", status.success ? "successMessage" : "errorMessage"]'>{{status.message}}</div>
+			<div v-show='this.message' v-bind:class='["formMessage", success ? "successMessage" : "errorMessage"]'>{{message}}</div>
 
 			<slot />
 

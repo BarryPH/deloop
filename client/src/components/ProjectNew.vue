@@ -15,9 +15,16 @@ export default {
 			const form = event.target;
 			const formData = new FormData(form);
 
-			const { data: { info } } = await this.$http.post('/projects', formData);
+			const response = await this.$http.post('/projects', formData);
 
-			return info;
+			if (response.status !== 200) {
+				return response;
+			}
+
+			const { project } = response.data;
+			this.$router.push({ name: 'Project', params: { id: project._id }});
+
+			return response;
 		},
 	},
 };

@@ -11,7 +11,11 @@ const jwtToken = localStorage.getItem('id_token');
 if (jwtToken) axios.defaults.headers.common.Authorization = `Bearer ${jwtToken}`;
 axios.defaults.baseURL = 'http://localhost:3000';
 
-Vue.prototype.$http = axios;
+const customAxios = axios.create({
+	validateStatus: status => status < 500,
+});
+
+Vue.prototype.$http = customAxios;
 Vue.config.productionTip = false;
 
 /* eslint-disable no-new */

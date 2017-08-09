@@ -25,16 +25,21 @@ export default {
 			const user = await this.$store.dispatch('FETCH_USER', { id: auth.user.id });
 			this.user = JSON.parse(JSON.stringify(user));
 		},
+
 		async handleSubmit(event) {
 			const JSONFormData = utils.formToJSON(event.target);
-			const { data: { token, user, info } } = await this.$http.post(`/users/${auth.user.id}`, JSONFormData);
+			const response = await this.$http.post(`/users/${auth.user.id}`, JSONFormData);
+
+			if (response.status !== 200) {
+				return response;
+			}
+
+			const { token, user } = response.data;
 
 			auth.setToken(token);
-
-			// eslint-disable-next-line no-underscore-dangle
 			this.$store.commit('SET_USER', { id: user._id, user });
 
-			return info;
+			return response;
 		},
 	},
 };

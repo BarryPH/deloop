@@ -54,10 +54,6 @@ module.exports.create = async (req, res) => {
 
 	const response = {
 		project,
-		info: {
-			success: true,
-			message: 'Success!',
-		},
 	};
 
 	res.json(response);

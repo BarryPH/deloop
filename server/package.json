@@ -6,7 +6,8 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node server.js",
-    "lint": "eslint ./config ./controllers ./models ./routes server.js --ext .js"
+    "lint": "eslint ./config ./controllers ./models ./routes server.js --ext .js",
+		"dev": "nodemon server.js"
   },
   "keywords": [],
   "author": "",

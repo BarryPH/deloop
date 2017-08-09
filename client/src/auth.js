@@ -4,12 +4,16 @@ export default {
 	},
 
 	async login(context, creds) {
-		const { data: { token, id, info } } = await context.$http.post('/login', {
+		const response = await context.$http.post('/login', {
 			email: creds.email,
 			password: creds.password,
 		});
 
-		if (!info.success) return info;
+		if (response.status !== 200) {
+			return response;
+		}
+
+		const { token, id } = response.data;
 
 		localStorage.setItem('id_token', token);
 		localStorage.setItem('user_id', id);
@@ -22,17 +26,21 @@ export default {
 		context.$http.defaults.headers.common.Authorization = `Bearer ${token}`;
 		context.$router.push({ name: 'Profile', params: { id }});
 
-		return info;
+		return response;
 	},
 
 	async register(context, creds) {
-		const { data: { token, id, info } } = await context.$http.post('/register', {
+		const response = await context.$http.post('/register', {
 			email: creds.email,
 			password: creds.password,
 			password2: creds.password2,
 		});
 
-		if (!info.success) return info;
+		if (response.status !== 200) {
+			return response;
+		};
+
+		const { token, id } = response.data;
 
 		localStorage.setItem('id_token', token);
 		localStorage.setItem('user_id', id);
@@ -45,7 +53,7 @@ export default {
 		context.$http.defaults.headers.common.Authorization = `Bearer ${token}`;
 		context.$router.push({ name: 'Profile', params: { id }});
 
-		return info;
+		return response;
 	},
 
 	async logout(context) {

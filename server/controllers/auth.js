@@ -38,12 +38,11 @@ module.exports.register = async (req, res, next) => {
 	const [user, info] = await promisifiedRegister(req, res, next);
 
 	if (!user) {
-		return res.json({
-			info: {
-				success: false,
+		res.status(400)
+			.json({
 				message: info.message,
-			},
-		});
+			});
+		return;
 	}
 
 	await promisifiedReqLogin(req, user);
@@ -53,10 +52,6 @@ module.exports.register = async (req, res, next) => {
 	const response = Object.assign({}, userJSON, {
 		token,
 		id: userJSON._id,
-		info: {
-			success: true,
-			message: 'Success!',
-		},
 	});
 
 	return res.json(response);
@@ -66,12 +61,11 @@ module.exports.login = async (req, res, next) => {
 	const [user, info] = await promisifiedLogin(req, res, next);
 
 	if (!user) {
-		return res.json({
-			info: {
-				success: false,
+		res.status(401)
+			.json({
 				message: info.message,
-			},
-		});
+			});
+		return;
 	}
 
 	const userJSON = user.toObject();
@@ -79,10 +73,6 @@ module.exports.login = async (req, res, next) => {
 	const response = Object.assign({}, userJSON, {
 		token,
 		id: userJSON._id,
-		info: {
-			success: true,
-			message: 'Success!',
-		},
 	});
 
 	return res.json(response);
