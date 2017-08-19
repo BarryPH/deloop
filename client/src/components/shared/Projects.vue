@@ -35,16 +35,18 @@ export default {
 
 <template>
 	<div class='projects' :class='[clear ? "clear" : null]'>
-		<div v-if='addNew' class='project addNew'>
+		<div v-if='addNew' class='project'>
 			<router-link to='/projects/new'>
-				<img src='http://via.placeholder.com/350x200'>
+				<div class='add-new-body'>
+					<div>&plus;</div>
+				</div>
 			</router-link>
 
 			<router-link to='/projects/new'>
-				<header class='title'>Add new project</header>
+				<header class='title add-new-link'>Add new project</header>
 			</router-link>
 		</div>
-:
+
 		<div v-for='project in projects' class='project'>
 			<router-link :to='`/projects/${project._id}`'>
 				<img :src='project.images[0] && project.images[0].url'>
@@ -84,14 +86,27 @@ export default {
 	box-shadow: none;
 }
 
-.project.addNew a {
-	color: var(--color-primary-blue);
+.add-new-body {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	height: 175px;
+	width: 100%;
+	background-color: var(--color-primary-grey);
+	font-size: 2.8rem;
+}
+
+.add-new-link {
+	color: var(--color-primary-shade);
 }
 
 img {
 	display: block;
-	margin-bottom: 1rem;
 	width: 100%;
+}
+
+.title {
+	margin-top: 1rem;
 }
 
 @media (max-width: 400px) {
