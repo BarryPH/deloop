@@ -43,10 +43,6 @@ export default {
 		},
 
 		async handleSubmit(event) {
-			const JSONFormData = {
-				project: this.$route.params.id,
-				content: this.comment,
-			};
 			const JSONFormData = utils.formToJSON(event.target);
 			JSONFormData.project = this.$route.params.id;
 

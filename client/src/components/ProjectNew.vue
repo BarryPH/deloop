@@ -16,7 +16,6 @@ export default {
 			const formData = new FormData(form);
 
 			const response = await this.$http.post('/projects', formData);
-			this.$router.push({ name: 'Project', params: { id: project._id }});
 
 			if (response.status !== 200) {
 				return response;
