@@ -50,7 +50,6 @@ module.exports.register = async (req, res, next) => {
 
 	const userJSON = user.toObject();
 	const token = jwt.sign(userJSON, config.superSecret);
-
 	const cleanUser = utils.cleanUser(userJSON);
 
 	const response =
@@ -74,7 +73,9 @@ module.exports.login = async (req, res, next) => {
 
 	const userJSON = user.toObject();
 	const token = jwt.sign(userJSON, config.superSecret);
-	const response = Object.assign({}, userJSON, {
+	const cleanUser = utils.cleanUser(userJSON);
+
+	const response = Object.assign({}, cleanUser, {
 		token,
 		id: userJSON._id,
 	});
